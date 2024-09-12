@@ -1,0 +1,69 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+package-lock.json
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+/.vscode/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env*.local
+.env
+
+# vercel
+.vercel
+Brewfile
+
+# firebase
+firestore-debug.log
+firebase-debug.log
+functions/firestore-debug.log
+ui-debug.log
+
+# Auto Generated PWA files
+**/public/workbox-*.js
+public/workbox-*.js.map
+public/worker-*.js
+public/worker-*.js.map
+**/public/sw.js
+public/sw.js.map
+**/public/fallback-*.js
+
+# Local Netlify folder
+.netlify
+
+# extensions
+extensions/*
+functions/.runtimeconfig.json
+functions/sendgrid.env
+functions/node_modules
+extensions/firestore-send-email-6bt9.env
+functions/sendgrid.env
+# Sentry Config File
+.env.sentry-build-plugin
+
+# Sentry Config File
+.env.sentry-build-plugin
+misinfo-dashboard.code-workspace
+.runtimeconfig.json
