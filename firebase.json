@@ -12,7 +12,8 @@
         "node_modules",
         ".git",
         "firebase-debug.log",
-        "firebase-debug.*.log"
+        "firebase-debug.*.log",
+        "*.local"
       ],
       "predeploy": [
         "npm --prefix \"$RESOURCE_DIR\" run lint"
@@ -28,10 +29,6 @@
       "cors": [
         {
           "origin": [
-            "https://misinfo-dashboard.netlify.app",
-            "https://dev-misinfo-dashboard.netlify.app",
-            "https://truthsleuthlocal.netlify.app",
-            "https://dev-truthsleuthlocal.netlify.app",
             "http://localhost:3000"
           ],
           "method": [
@@ -59,8 +56,6 @@
     "rules": "storage.rules"
   },
   "extensions": {
-    "firestore-send-email-6bt9": "firebase/firestore-send-email@0.1.33",
-    "firestore-send-email": "firebase/firestore-send-email@0.1.34"
   },
   "scripts": {
     "prestart": "node initializeFirestore.js"

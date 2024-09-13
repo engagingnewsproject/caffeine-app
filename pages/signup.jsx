@@ -29,7 +29,8 @@ import { Country, State, City } from 'country-state-city'
 import moment from 'moment'
 import { RiContactsBookLine } from 'react-icons/ri'
 import { Button, Typography } from '@material-tailwind/react'
-import { GiMagnifyingGlass } from "react-icons/gi";
+import { GiCoffeeCup } from "react-icons/gi";
+
 import Head from 'next/head'
 const SignUp = () => {
 	const router = useRouter()
@@ -127,15 +128,15 @@ const SignUp = () => {
                   they have no real profile
                   -- or at least that is what my testing has shown.
                   1) Admin user adds a new agency
-                  2) user's email is sent email subject:"Sign in to MisInfo App requested"
+                  2) user's email is sent email subject:"Sign in to Caffeine App requested"
                   3) user clicks link in email
                   4) signup.jsx page with "** Must be the email you were sent the invite." text under Email input.
                   5) user submits
-                  6) user's email is sent "Verify your email for MisInfo App"
+                  6) user's email is sent "Verify your email for Caffeine App"
                   7) user clicks link
                   8) verifyEmail.jsx page
                   9) user clicks link
-                  10) https://misinfo-5d004.firebaseapp.com/__/auth/action?0000 page
+                  10) https://caffeine-app-d8cd8.firebaseapp.com/__/auth/action?0000 page
                   11) user clicks "Continue" button
                   12) login.jsx page to log in
                   notes: where is the user assigned the 'Agency' custom claim?
@@ -260,15 +261,15 @@ const SignUp = () => {
 	return (
 		<>
 			<Head>
-				<title>Signup | Truth Sleuth Local</title>
+				<title>Signup | Caffiene App</title>
 			</Head>
 			<div className="w-screen h-screen overflow-auto flex justify-center items-start pt-12 pb-8">
 				<div className="w-full max-w-sm font-light">
 					<div className="flex flex-col items-center justify-center mb-2">
-						<div className="bg-blue-600 p-7 rounded-full mb-2">
-							<GiMagnifyingGlass size={30} className="fill-white" />
+						<div className="bg-brown p-7 rounded-full mb-2">
+							<GiCoffeeCup size={30} className="fill-white" />
 						</div>
-						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Truth Sleuth Local</Typography>
+						<Typography variant="small" className='text-xs font-semibold text-brown'>Caffiene App</Typography>
 					</div>
 					<form className="px-8 pt-6 pb-4 mb-4" onSubmit={handleSignUp}>
 						<div className="mb-4">
@@ -432,12 +433,11 @@ const SignUp = () => {
 						{t('haveAccount')}
 						<Link
 							href="/login"
-							className="inline-block px-2 align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+							className="inline-block px-2 align-baseline font-bold text-sm text-brown hover:text-brown-dark">
 							{t('login_action')}
 						</Link>
 					</p>
 					<div className="flex justify-center items-center p-6 gap-1">
-						{/* <span className="text-blue-500 text-md uppercase font-bold py-2 px-2">{t("select")}</span> */}
 						<LanguageSwitcher />
 					</div>
 				</div>

@@ -47,7 +47,7 @@ const VerifyEmail = () => {
   return (
 		<>
 			<Head>
-				<title>Verify Email | Truth Sleuth Local</title>
+				<title>Verify Email | Caffiene App</title>
 			</Head>
 			<div className="w-screen h-screen flex justify-center items-center">
 				<div className="w-full max-w-sm font-light">
@@ -60,7 +60,7 @@ const VerifyEmail = () => {
 						{signUpError?.length !== 0 && <div>{signUpError}</div>}
 						{userRole?.agency ? (
 							<div>
-								<p className="text-lg font-bold text-blue-600 tracking-wider pt-2">
+								<p className="text-lg font-bold text-brown tracking-wider pt-2">
 									Email Verification
 								</p>
 

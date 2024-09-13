@@ -113,7 +113,7 @@ const Report = () => {
 	// Styles
 	// //
   const style = {
-		button: 'w-80 self-center mt-4 shadow bg-blue-600 hover:bg-gray-100 text-sm text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline',
+		button: 'w-80 self-center mt-4 shadow bg-brown hover:bg-gray-100 text-sm text-white py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline',
 		pageContainer: 'md:h-full w-full md:pt-4',
 		container: 'pl-2 sm:pl-12',
 		wrapper: 'w-full h-full flex flex-col py-5',
@@ -123,7 +123,7 @@ const Report = () => {
 	return (
 		<>
 			<Head>
-				<title>Report | Truth Sleuth Local</title>
+				<title>Report | Caffiene App</title>
 			</Head>
 			<div className={style.pageContainer}>
 				<Navbar

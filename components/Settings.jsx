@@ -186,7 +186,7 @@ const Settings = () => {
             <div className="font-light">Topic Tags</div>
             <button
                 onClick={() => setTagSystem(1)}
-                className="bg-sky-100 hover:bg-blue-200 text-blue-600 font-normal py-2 px-6 border border-blue-600 rounded-xl">
+                className="bg-sky-100 hover:bg-blue-200 text-brown font-normal py-2 px-6 border border-brown rounded-xl">
                 Edit Topics
             </button>
         </div>
@@ -194,7 +194,7 @@ const Settings = () => {
             <div className="font-light">Source Tags</div>
             <button
                 onClick={() => setTagSystem(2)}
-                className="bg-sky-100 hover:bg-blue-200 text-blue-600 font-normal py-2 px-6 border border-blue-600 rounded-xl">
+                className="bg-sky-100 hover:bg-blue-200 text-brown font-normal py-2 px-6 border border-brown rounded-xl">
                 Edit Sources
             </button>
         </div>
@@ -202,7 +202,7 @@ const Settings = () => {
             <div className="font-light">Customized Labels</div>
             <button
                 onClick={() => setTagSystem(3)}
-                className="bg-sky-100 hover:bg-blue-200 text-blue-600 font-normal py-2 px-6 border border-blue-600 rounded-xl">
+                className="bg-sky-100 hover:bg-blue-200 text-brown font-normal py-2 px-6 border border-brown rounded-xl">
                 Edit Labels
             </button>
         </div>

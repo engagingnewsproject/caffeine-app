@@ -96,7 +96,7 @@ const ReportModal = ({
 					}}>
 					<div className='flex justify-between w-full mb-6'>
 						<div className='flex w-full items-baseline'>
-							<div className='text-2xl font-bold text-blue-600 tracking-wider'>
+							<div className='text-2xl font-bold text-brown tracking-wider'>
 								Report Information
 							</div>
 							<Link href={`dashboard${reportURI}`} target='_blank'>
@@ -228,7 +228,7 @@ const ReportModal = ({
 												<a
 													target="_blank"
 													rel="noopener noreferrer"
-													className="text-blue-600 hover:underline"
+													className="text-brown hover:underline"
 													href={"mailto:" + reportSubmitBy.email}>
 													{reportSubmitBy.email}
 												</a>
@@ -349,7 +349,7 @@ const ReportModal = ({
 								<div className='flex items-center justify-between justify-items-stretch'>
 									<div className='save-button w-full'>
 										<button
-											className='w-full bg-blue-600 hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline'
+											className='w-full bg-brown hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline'
 											type='submit'>
 											Save
 										</button>

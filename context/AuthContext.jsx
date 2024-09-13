@@ -113,9 +113,12 @@ export const AuthContextProvider = ({children}) => {
   
   const verifyEmail = (user) => {
     return new Promise((resolve, reject) => {
+      const isDevelopment = window.location.hostname === 'localhost';
       var actionCodeSettings = {
-        'url': 'https://truthsleuthlocal.netlify.app/login',
-        'handleCodeInApp': true,
+        url: isDevelopment
+          ? 'http://localhost:3001/login' // Use localhost during development
+          : 'https://truthsleuthlocal.netlify.app/login', // Use production URL
+        handleCodeInApp: true,
       };
 
       sendEmailVerification(user, actionCodeSettings)
@@ -260,7 +263,7 @@ export const AuthContextProvider = ({children}) => {
 		// Determine the base URL based on the environment
 		const isLocalhost = window.location.hostname === 'localhost'
 		const baseUrl = isLocalhost
-			? 'http://localhost:3000/signup'
+			? 'http://localhost:3001/signup'
 			: 'https://truthsleuthlocal.netlify.app/signup'
 
 		var actionCodeSettings = {

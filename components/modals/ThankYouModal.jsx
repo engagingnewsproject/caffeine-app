@@ -15,7 +15,7 @@ const ThankYouModal = ({ setContactHelpModal, setContactSent, handleContactHelpS
                 className={`flex overflow-y-auto justify-center items-center z-[1300] absolute top-0 left-0 w-full h-full`}>
                 <div onClick={(e) => {e.stopPropagation()}} className={`flex-col justify-center items-center bg-white md:w-8/12 lg:w-6/12 h-auto rounded-2xl py-10 px-10 z-50`}>
                     <div className="flex justify-between w-full mb-5">
-                        <div className="text-md font-bold text-blue-600 tracking-wide">Contact Help Form</div>
+                        <div className="text-md font-bold text-brown tracking-wide">Contact Help Form</div>
                         <button onClick={handleThankYouClose} className="text-gray-800">
                             <IoClose size={25}/>
                         </button>

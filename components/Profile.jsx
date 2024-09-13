@@ -68,9 +68,9 @@ const Profile = ({ customClaims }) => {
     sectionContainer: 'w-full h-full flex flex-col mb-5 overflow-visible',
     sectionWrapper: 'flex flex-col',
     button:
-      'bg-blue-600 col-start-3 self-end hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline',
+      'bg-brown col-start-3 self-end hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline',
     buttonHollow:
-      'bg-sky-100 hover:bg-blue-200 text-blue-600 font-normal py-2 px-6 border border-blue-600 rounded-xl',
+      'bg-sky-100 hover:bg-blue-200 text-brown font-normal py-2 px-6 border border-brown rounded-xl',
     input:
       'text-md font-light bg-white rounded-xl p-4 border-none w-full focus:text-gray-700 focus:bg-white focus:border-blue-400 focus:outline-none resize-none',
     inputSelect:
@@ -324,7 +324,7 @@ const Profile = ({ customClaims }) => {
 
   const languageToggle = () => (
     <div className="flex justify-between mx-0 my-6 tracking-normal items-center">
-      <div className="text-xl font-extrabold text-blue-600">
+      <div className="text-xl font-extrabold text-brown">
         {t('selectLanguage')}
       </div>
       <div>
@@ -335,7 +335,7 @@ const Profile = ({ customClaims }) => {
 
   const agencySettings = () => (
     <div className="z-0 flex-col m-6 bg-slate-100">
-      <div className="text-xl font-extrabold text-blue-600 tracking-wider">
+      <div className="text-xl font-extrabold text-brown tracking-wider">
         Agency Settings
       </div>
       <div className="w-full h-auto">

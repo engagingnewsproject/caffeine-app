@@ -239,7 +239,7 @@ const ReportsSection = ({
 	}
 
 	const handleUserSendEmail = (reportURI) => {
-		const subject = 'Misinfo Report'
+		const subject = 'Caffeine App Report'
 		const body = `Link to report:\n${reportURI}`
 		const uri = `mailto:?subject=${encodeURIComponent(
 			subject,

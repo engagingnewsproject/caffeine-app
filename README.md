@@ -1,10 +1,9 @@
-# Misinfo Dashboard
+# Caffeine App
 
 [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/)
 [![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
 [![Firebase](https://img.shields.io/badge/firebase-a08021?style=for-the-badge&logo=firebase&logoColor=ffcd34)](https://firebase.google.com/)
 [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Netlify](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)](https://app.netlify.com/sites/misinfo-dashboard/deploys)
 
 [Getting Started](https://github.com/engagingnewsproject/misinfo-dashboard/?tab=readme-ov-file#getting-started) | [Firebase Emulator](https://github.com/engagingnewsproject/misinfo-dashboard/?tab=readme-ov-file#4-install-and-run-firebase-emulator) | [Firebase](https://github.com/engagingnewsproject/misinfo-dashboard/?tab=readme-ov-file#firebase-functions) | [Push to Netlify](https://github.com/engagingnewsproject/misinfo-dashboard/?tab=readme-ov-file#project-lead-push-to-netlify-live-site)
 
@@ -38,7 +37,7 @@ First step! Clone this repo into a local directory (ex. `~/username/sites/`) on 
 - From the command line in your project root run:
 
     ```
-    git clone https://github.com/engagingnewsproject/misinfo-dashboard.git
+    git clone https://github.com/engagingnewsproject/caffeine-app.git
     ```
  
 ### 2. Install Packages
@@ -111,7 +110,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - > 1 terminal tab for `firebase emulators:start --import=./emulator-data`. 
 
 > NOTE: You will also have 2 browser tabs open while developing:
-- > 1 browser tab for `localhost:3000` (actual misinfo dashboard), 
+- > 1 browser tab for `localhost:3000` (actual caffeine-app dashboard), 
 - > 1 browser tab for "Firebase Emulator Suite" 
 
 Develop away! And good luck :)
@@ -166,7 +165,7 @@ Open that link to view the Emulator UI:
 
 #### Users
 
-Your user UID that you created will not be associated with any reports or agencies so you can either add reports via the Misinfo Dashboard in your localhost:3000 window or go into the Emulator UI and manually change the `userID` to your own for some reports. Same idea with assigning your user to an agency: go into the Emulator UI and add your email to an agency's `agencyUsers` field.
+Your user UID that you created will not be associated with any reports or agencies so you can either add reports via the Caffeine App in your localhost:3000 window or go into the Emulator UI and manually change the `userID` to your own for some reports. Same idea with assigning your user to an agency: go into the Emulator UI and add your email to an agency's `agencyUsers` field.
 
 #### Emulator log files
 
@@ -192,22 +191,22 @@ firebase deploy --only functions
 
 With proper permissions access Firebase Console or Firebase Cloud Console.
 
-- Firebase project name: Misinfo
-- Firebase project ID: misinfo-5d004
-- Firebase project #: 2581605663
+- Firebase project name: Caffeine App
+- Firebase project ID: caffeine-app-d8cd8
+- Firebase project #: 192976628738
 
 #### Firebase Storage
 
-- Firebase storage name: misinfo-5d004.appspot.com
+- Firebase storage name: caffeine-app-d8cd8.appspot.com
 
 Links: [Chrome React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) || [VS Code React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets) || [VS Code Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
 ## Deploy to Netlify
 
 #### Deploy to dev
-Link: https://dev-misinfo-dashboard.netlify.app/
+Link: https://dev-caffeine-app.netlify.app/
 
-To push all changes to the dev site on Netlify using the [Engaging News Project's misinfo-dashboard](https://github.com/engagingnewsproject/misinfo-dashboard) repo's `dev` branch.
+To push all changes to the dev site on Netlify using the [Engaging News Project's caffeine-app](https://github.com/engagingnewsproject/caffeine-app) repo's `dev` branch.
 
 _The `dev` branch is the branch that contains the dev live site code._
 

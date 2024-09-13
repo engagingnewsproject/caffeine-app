@@ -88,7 +88,7 @@ const ReportDetails = () => {
 	}, [info])
 
 	function SendLinkByMail(href) {
-    var subject= "Misinformation Report";
+    var subject= "Caffeine App";
     var body = "Link to report:\r\n";
     body += window.location.href;
     var uri = "mailto:?subject=";
@@ -101,7 +101,7 @@ const ReportDetails = () => {
 	return (
 		<div className="p-16">
 			<div className="flex justify-between w-full mb-5">
-				<div className="text-2xl font-bold text-blue-600 tracking-wider mb-8">
+				<div className="text-2xl font-bold text-brown tracking-wider mb-8">
 				{/* Temp link back to Dashboard for testing */}
 					More Information
 				</div>
@@ -123,7 +123,7 @@ const ReportDetails = () => {
           { reporterInfo &&
 						<div className="text-md mb-4 font-light text-right">
 							<div>
-              <span className="font-semibold">Reported by:</span> {reporterInfo['name']} (<a target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline" href={"mailto:" + reporterInfo['email']}>{reporterInfo['email']}</a>)
+              <span className="font-semibold">Reported by:</span> {reporterInfo['name']} (<a target="_blank" rel="noopener noreferrer" className="text-brown hover:underline" href={"mailto:" + reporterInfo['email']}>{reporterInfo['email']}</a>)
 							</div>
           </div>}
 					<div className="mb-8">

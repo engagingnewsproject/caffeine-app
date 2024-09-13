@@ -79,7 +79,7 @@ const Dashboard = () => {
 	return (
 		<>
 			<Head>
-				<title>Dashboard | Truth Sleuth Local</title>
+				<title>Dashboard | Caffiene App</title>
 			</Head>
 			<div className="w-full">
 				<Navbar

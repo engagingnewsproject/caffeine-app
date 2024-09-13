@@ -36,7 +36,7 @@ const EditUserModal = ({
 			"flex-col justify-center items-center w-10/12 md:w-8/12 rounded-2xl py-10 px-10 bg-sky-100 sm:overflow-visible",
 		modal_header_container: "grid md:gap-5 lg:gap-5 auto-cols-auto mb-6",
 		modal_header_wrapper: "flex w-full items-baseline justify-between",
-		modal_header: "text-lg font-bold text-blue-600 tracking-wider",
+		modal_header: "text-lg font-bold text-brown tracking-wider",
 		modal_close: "text-gray-800",
 		modal_form_container:
 			"grid justify-center md:gap-5 lg:gap-5 grid-cols-3 auto-cols-auto",
@@ -49,7 +49,7 @@ const EditUserModal = ({
 		modal_form_input:
 			"shadow border-none rounded-xl min-w-full col-span-2 p-3 text-sm text-gray-700 leading-tight focus:outline-none focus:shadow-outline",
 		modal_form_button:
-			"bg-blue-600 self-end hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline",
+			"bg-brown self-end hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline",
 	}
 	
 	return (

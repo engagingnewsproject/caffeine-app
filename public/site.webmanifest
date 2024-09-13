@@ -4,10 +4,10 @@
     "display": "fullscreen",
     "scope": "/",
     "start_url": "/login",
-    "name": "Truth Sleuth Local",
+    "name": "Caffeine App",
     "id": "/login",
-    "short_name": "Truth Sleuth",
-    "description": "Report misinformation in your location for submission to news agencies near that location.",
+    "short_name": "CaffeineApp",
+    "description": "Report caffeine usage in your location.",
     "icons": [
         {
             "src": "/icon-192x192.png",

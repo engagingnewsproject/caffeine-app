@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai'
-import { GiMagnifyingGlass } from "react-icons/gi";
+import { GiCoffeeCup } from "react-icons/gi";
+
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { useAuth } from '../context/AuthContext'
 import { db } from "../config/firebase"
@@ -47,15 +48,15 @@ const Headbar = ({ search, setSearch}) => {
                         {customClaims.agency && agencyLogo ? (
                             <Image src={agencyLogo} width={55} height={55} alt="agency logo" className='w-auto'/>
                         ) : (
-                            <div className='bg-blue-600 p-3 rounded-full'>
-                                <GiMagnifyingGlass className='fill-white' />
+                            <div className='bg-brown p-3 rounded-full'>
+                                <GiCoffeeCup className='fill-white' />
                             </div>
                         )}
                     </div>
                     <div className="text-md font-semibold px-4 tracking-wide">
                         {customClaims.admin && (
                             <>
-                                Truth Sleuth Local
+                                Caffiene App
                                 <div className='text-sm font-normal'>ADMIN DASHBOARD</div>
                             </>
                         )}
@@ -66,7 +67,7 @@ const Headbar = ({ search, setSearch}) => {
                             </>
                         )}
                         {!customClaims.agency && !customClaims.admin && (
-                            <>Truth Sleuth Local</>
+                            <>Caffiene App</>
                         )}
                     </div>
                 </div>
@@ -81,7 +82,7 @@ const Headbar = ({ search, setSearch}) => {
                         onChange={handleChange}
                         value={search} />
                     <button 
-                    className="py-1 px-1 mt-1 mr-1 absolute right-0 top-0 bg-blue-600 text-white rounded-xl" 
+                    className="py-1 px-1 mt-1 mr-1 absolute right-0 top-0 bg-brown text-white rounded-xl" 
                     type='submit'>
                         <AiOutlineSearch size={25}/>
                     </button>

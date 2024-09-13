@@ -9,8 +9,8 @@ import style from '../styles/style.js'
 import Head from 'next/head'
 
 // Import Sentry configuration
-import "../sentry.client.config.js"
-import "../sentry.server.config";
+// import "../sentry.client.config.js"
+// import "../sentry.server.config";
 
 const noAuthRequired = ["/login", "/signup", "/resetPassword", "/testPage"]
 // for testing page add '/testPage' above

@@ -9,109 +9,109 @@ const axios = require('axios'); // used for sending slack messages from help req
 // Slack <-> Firebase connection URL
 // To reset the Slack webhook url run:
 // `firebase functions:config:set slack.webhook_url="https://hooks.slack.com/services/SLACK_WEBHOOK_URL"`
-const SLACK_WEBHOOK_URL = functions.config().slack.webhook_url;
+// const SLACK_WEBHOOK_URL = functions.config().slack.webhook_url;
 
 // Function to post a message to Slack
-const postToSlack = async (
-	userID,
-	userName,
-	userEmail,
-	userRole,
-	subject,
-	messageText,
-	imageUrl,
-) => {
-	try {
-		const payload = {
-			blocks: [
-				{
-					type: 'section',
-					text: {
-						type: 'mrkdwn',
-						text: `*${userName}* - ${subject}`,
-					},
-				},
-				{
-					type: 'section',
-					block_id: 'section567',
-					text: {
-						type: 'mrkdwn',
-						text: messageText,
-					},
-					accessory: {
-						type: 'image',
-						image_url: imageUrl,
-						alt_text: 'User uploaded image',
-					},
-				},
-				{
-					type: 'section',
-					block_id: 'section789',
-					fields: [
-						{
-							type: 'mrkdwn',
-							text: `*User ID*\n${userID}\n*User Email*\n${userEmail}\n*User Role*\n${userRole}`,
-						},
-					],
-        },
-        {
-          type: 'image',
-          title: {
-            type: 'plain_text',
-            text: 'User uploaded image'
-          },
-          block_id: 'image4',
-          image_url: imageUrl,
-          alt_text: 'File uploaded by user.'
-        }
-			],
-		}
-		await axios.post(SLACK_WEBHOOK_URL, payload)
-	} catch (error) {
-		console.error('Error posting message to Slack:', error.message)
-	}
-}
+// const postToSlack = async (
+// 	userID,
+// 	userName,
+// 	userEmail,
+// 	userRole,
+// 	subject,
+// 	messageText,
+// 	imageUrl,
+// ) => {
+// 	try {
+// 		const payload = {
+// 			blocks: [
+// 				{
+// 					type: 'section',
+// 					text: {
+// 						type: 'mrkdwn',
+// 						text: `*${userName}* - ${subject}`,
+// 					},
+// 				},
+// 				{
+// 					type: 'section',
+// 					block_id: 'section567',
+// 					text: {
+// 						type: 'mrkdwn',
+// 						text: messageText,
+// 					},
+// 					accessory: {
+// 						type: 'image',
+// 						image_url: imageUrl,
+// 						alt_text: 'User uploaded image',
+// 					},
+// 				},
+// 				{
+// 					type: 'section',
+// 					block_id: 'section789',
+// 					fields: [
+// 						{
+// 							type: 'mrkdwn',
+// 							text: `*User ID*\n${userID}\n*User Email*\n${userEmail}\n*User Role*\n${userRole}`,
+// 						},
+// 					],
+//         },
+//         {
+//           type: 'image',
+//           title: {
+//             type: 'plain_text',
+//             text: 'User uploaded image'
+//           },
+//           block_id: 'image4',
+//           image_url: imageUrl,
+//           alt_text: 'File uploaded by user.'
+//         }
+// 			],
+// 		}
+// 		await axios.post(SLACK_WEBHOOK_URL, payload)
+// 	} catch (error) {
+// 		console.error('Error posting message to Slack:', error.message)
+// 	}
+// }
 
-exports.notifySlackOnNewHelpRequest = functions.firestore
-	.document('helpRequests/{requestId}')
-	.onCreate(async (snap) => {
-		const newRequest = snap.data()
-		const userID = newRequest.userID || 'unknown user'
-		let userName = 'Unknown'
-		let userEmail = 'No email provided'
-		let userRole = 'No role specified'
+// exports.notifySlackOnNewHelpRequest = functions.firestore
+// 	.document('helpRequests/{requestId}')
+// 	.onCreate(async (snap) => {
+// 		const newRequest = snap.data()
+// 		const userID = newRequest.userID || 'unknown user'
+// 		let userName = 'Unknown'
+// 		let userEmail = 'No email provided'
+// 		let userRole = 'No role specified'
 
-		if (userID !== 'unknown user') {
-			const userRef = admin.firestore().collection('mobileUsers').doc(userID)
-			const doc = await userRef.get()
-			if (doc.exists) {
-				const userData = doc.data()
-				userName = userData.name || userName
-				userEmail = userData.email || userEmail
-				userRole = userData.userRole || userRole
-			} else {
-				console.log('User not found')
-				return // Optionally exit if no user info is available
-			}
-		}
+// 		if (userID !== 'unknown user') {
+// 			const userRef = admin.firestore().collection('mobileUsers').doc(userID)
+// 			const doc = await userRef.get()
+// 			if (doc.exists) {
+// 				const userData = doc.data()
+// 				userName = userData.name || userName
+// 				userEmail = userData.email || userEmail
+// 				userRole = userData.userRole || userRole
+// 			} else {
+// 				console.log('User not found')
+// 				return // Optionally exit if no user info is available
+// 			}
+// 		}
 
-		const subject = newRequest.subject || 'No Subject'
-		const messageText = newRequest.message || 'No message provided'
-		const imageUrl =
-			newRequest.images && newRequest.images.length > 0
-				? newRequest.images[0]
-				: 'https://example.com/default-image.jpg'
+// 		const subject = newRequest.subject || 'No Subject'
+// 		const messageText = newRequest.message || 'No message provided'
+// 		const imageUrl =
+// 			newRequest.images && newRequest.images.length > 0
+// 				? newRequest.images[0]
+// 				: 'https://example.com/default-image.jpg'
 
-		return postToSlack(
-			userID,
-			userName,
-			userEmail,
-			userRole,
-			subject,
-			messageText,
-			imageUrl,
-		)
-	})
+// 		return postToSlack(
+// 			userID,
+// 			userName,
+// 			userEmail,
+// 			userRole,
+// 			subject,
+// 			messageText,
+// 			imageUrl,
+// 		)
+// 	})
 
 
 exports.addUserRole = functions.https.onCall((data,context) => {

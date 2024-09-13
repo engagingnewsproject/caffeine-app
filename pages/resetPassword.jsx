@@ -47,7 +47,7 @@ const ResetPassword = () => {
 	return (
 		<>
 			<Head>
-				<title>Reset Password | Truth Sleuth Local</title>
+				<title>Reset Password | Caffiene App</title>
 			</Head>
 
 			<div className="w-screen h-screen flex justify-center items-center">

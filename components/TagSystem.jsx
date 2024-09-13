@@ -200,7 +200,7 @@ const TagSystem = ({ tagSystem, setTagSystem, agencyID}) => {
                     <button onClick={() => setTagSystem(0)}>
                         <IoMdArrowRoundBack size={25} />
                     </button>
-                    <div className="text-xl px-5 font-extrabold text-blue-600 tracking-wider">
+                    <div className="text-xl px-5 font-extrabold text-brown tracking-wider">
                         {tagSystem == 3 ? "Customized " + tagSystems[tagSystem] : tagSystems[tagSystem] + " Tags"}
                     </div>
                     <div className="text-sm font-light">
@@ -211,7 +211,7 @@ const TagSystem = ({ tagSystem, setTagSystem, agencyID}) => {
                         className={`flex items-center shadow ml-auto mr-6 bg-white hover:bg-gray-100 text-sm py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline`}
                         type="submit"
                         onClick={handleAddNew}>
-                        <FaPlus className="text-blue-600" size={12}/>
+                        <FaPlus className="text-brown" size={12}/>
                         <div className="px-2 font-normal tracking-wide">{"New " + tagSystems[tagSystem]}</div>
                     </button> :
                     <div className="flex items-center ml-auto">
@@ -227,7 +227,7 @@ const TagSystem = ({ tagSystem, setTagSystem, agencyID}) => {
                                 className="flex items-center shadow mr-6 bg-white hover:bg-gray-100 text-sm py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
                                 type="submit"
                                 onClick={(e) => updateTag(e, "rename")}>
-                                <MdModeEditOutline className="text-blue-600" size={18}/>
+                                <MdModeEditOutline className="text-brown" size={18}/>
                                 <div className="px-2 font-normal tracking-wide">Rename</div>
                             </button>
                             <button
@@ -242,7 +242,7 @@ const TagSystem = ({ tagSystem, setTagSystem, agencyID}) => {
                 <div className="relative">
                 <form className="w-full mt-7 ml-2 relative" onChange={handleChange} onSubmit={handleSearch}>
                     <button 
-                    className="p-1 absolute right-1 top-1 bg-blue-600 text-white rounded-xl" 
+                    className="p-1 absolute right-1 top-1 bg-brown text-white rounded-xl" 
                     type='submit'>
                         <AiOutlineSearch size={25}/>
                     </button>
@@ -313,7 +313,7 @@ const TagSystem = ({ tagSystem, setTagSystem, agencyID}) => {
                         }}>
                         {list.map((item) => {
                             const normStyles = "text-md font-light p-2 my-3 md:mx-2 cursor-pointer leading-normal flex items-center justify-center"
-                            const selectedStyles = normStyles + " bg-blue-600 text-white rounded-lg"
+                            const selectedStyles = normStyles + " bg-brown text-white rounded-lg"
                             const randomKey = self.crypto.randomUUID(); // Generate random UUID
                             return (
                                     !item.includes('Other') &&

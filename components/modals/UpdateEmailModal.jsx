@@ -44,7 +44,7 @@ const UpdateEmailModal = ({ setEmailModal }) => {
                     e.stopPropagation()
                 }}>
                     <div className="flex justify-between w-full mb-5">
-                        <div className="text-md font-bold text-blue-600 tracking-wide">{updateSuccess ? t('emailUpdated'): t('resetEmail')}</div>
+                        <div className="text-md font-bold text-brown tracking-wide">{updateSuccess ? t('emailUpdated'): t('resetEmail')}</div>
                         {/* TODO: Change here */}
                         <button onClick={() => setEmailModal(false)} className="text-gray-800">
                             <IoClose size={25}/>
@@ -93,7 +93,7 @@ const UpdateEmailModal = ({ setEmailModal }) => {
                         <div className="mt-6">
                             <button
                                 disabled={!data.newEmail || data.newEmail.length > 0 && data.newEmail.length < 8}
-                                className="w-full bg-blue-600 hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline"
+                                className="w-full bg-brown hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline"
                                 type="submit">
                                 {t('resetEmail')}
                             </button>

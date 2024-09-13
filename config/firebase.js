@@ -5,7 +5,7 @@ import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
 import { getStorage,connectStorageEmulator } from "firebase/storage";
 import { getAnalytics } from "firebase/analytics";
 import { getPerformance } from "firebase/performance";
-import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "firebase/app-check";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 // UNCOMMENT "connectFunctionsEmulator" BELOW: enable connection to firebase functions emulator
 // connectFunctionsEmulator
@@ -43,7 +43,7 @@ if (typeof window !== 'undefined') {
   // Docs: https://firebase.google.com/docs/app-check/web/debug-provider?authuser=0
   self.FIREBASE_APPCHECK_DEBUG_TOKEN = process.env.NEXT_PUBLIC_FIREBASE_APPCHECK_DEBUG_TOKEN;
   initializeAppCheck(app, {
-      provider: new ReCaptchaEnterpriseProvider(process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_ENTERPRISE_SITE_KEY),
+      provider: new ReCaptchaV3Provider(process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_ENTERPRISE_SITE_KEY),
       isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
   });
 }

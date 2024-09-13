@@ -1,14 +1,12 @@
 {
   "projects": {
-    "default": "misinfo-5d004",
-    "dev": "misinfo-dashboard-dev"
+    "default": "caffeine-app-d8cd8"
   },
   "targets": {},
   "etags": {
-    "misinfo-5d004": {
-      "extensionInstances": {
-        "firestore-send-email": "7fd55e2974502afa976240b20ebb6a0f2427948309607b920dd2aba36fbdbe9f"
-      }
+    "caffeine-app-d8cd8": {
+      "extensionInstances": {}
     }
-  }
+  },
+  "dataconnectEmulatorConfig": {}
 }

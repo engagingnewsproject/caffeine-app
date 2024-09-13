@@ -35,7 +35,7 @@ const RenameTagModal = ({ replaceTag, selected, list, setRenameTagModal, addNewT
             <div onClick={() => setRenameTagModal(false)} className="flex justify-center items-center z-[9999] absolute top-0 left-0 w-full h-full">
                 <div onClick={(e) => { e.stopPropagation() }} className="flex-col justify-center items-center bg-white w-80 h-auto rounded-2xl py-10 px-10">
                     <div className="flex justify-between w-full mb-5">
-                        <div className="text-md font-bold text-blue-600 tracking-wide">Rename</div>
+                        <div className="text-md font-bold text-brown tracking-wide">Rename</div>
                         <button onClick={() => setRenameTagModal(false)} className="text-gray-800">
                             <IoClose size={25}/>
                         </button>
@@ -62,7 +62,7 @@ const RenameTagModal = ({ replaceTag, selected, list, setRenameTagModal, addNewT
                                 Replace
                             </button>
                             <button
-                                className="bg-white hover:bg-blue-600 hover:text-white text-sm text-blue-500 font-bold py-1.5 px-6 rounded-md focus:outline-none focus:shadow-outline"
+                                className="bg-white hover:bg-brown hover:text-white text-sm text-blue-500 font-bold py-1.5 px-6 rounded-md focus:outline-none focus:shadow-outline"
                                 type="submit">
                                 Keep Both
                             </button>
