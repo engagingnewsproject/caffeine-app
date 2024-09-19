@@ -16,6 +16,7 @@
 
 [build.environment]
   NETLIFY_BUILD_DEBUG = "true"
+  NODE_VERSION = "20.12.2"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.
