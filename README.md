@@ -1,4 +1,4 @@
-# Caffeine App
+# Caffeine Dashboard
 
 [![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)](https://react.dev/)
 [![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
@@ -6,16 +6,6 @@
 [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 
 [Technical Documentation](https://github.com/engagingnewsproject/caffeine-app/blob/main/technicalDocumentation.md)
-
-## Already set up?
-
-Simple. Run 
-
-```
-yarn dev
-```
-
-Not set up? Keep reading...
 
 ## Getting Started
 
