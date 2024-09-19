@@ -60,7 +60,7 @@ const VerifyEmail = () => {
 						{signUpError?.length !== 0 && <div>{signUpError}</div>}
 						{userRole?.agency ? (
 							<div>
-								<p className="text-lg font-bold text-brown tracking-wider pt-2">
+								<p className="text-lg font-bold text-blue-600 tracking-wider pt-2">
 									Email Verification
 								</p>
 

@@ -21,7 +21,7 @@ const style = {
     defaultProps: {
       variant: 'filled',
       size: 'md',
-      color: 'brown',
+      color: 'blue',
     },
     valid: {
       variants: ['filled', 'outlined', 'gradient', 'text'],
@@ -53,8 +53,8 @@ const style = {
       },
       variants: {
         filled: {
-          brown: {
-            hover: 'hover:shadow-lg hover:shadow-brown-dark',
+          blue: {
+            hover: 'hover:shadow-lg hover:shadow-blue-600-dark',
             focus: 'focus:opacity-[0.85] focus:shadow-none',
             active: 'active:opacity-[0.85] active:shadow-none',
           },

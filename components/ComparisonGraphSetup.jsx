@@ -153,7 +153,7 @@ const ComparisonGraphSetup = ({privilege, agencyId}) => {
                   <Tooltip anchorSelect=".tooltip-previous" place="top" delayShow={500}>Previous</Tooltip>
                 </button>
                                 <div className="bg-white rounded-xl mt-6 py-5 pl-3 pr-3 w-full lg:w-1/3 overflow-x-auto order-first lg:order-none">
-                  <h1 className="text-2xl font-bold text-brown pt-6 tracking-wider text-center ">Select dates</h1>
+                  <h1 className="text-2xl font-bold text-blue-600 pt-6 tracking-wider text-center ">Select dates</h1>
                   <h1 className="pl-3 text-center">Select a date range to collect the number of reports for the selected topics. </h1>
                   {dateError && <h1 className="pl-3 pb-4 text-center text-red-500">You must select a date range of at least three days and no more than three weeks.</h1>}
                   

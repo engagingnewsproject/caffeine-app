@@ -165,7 +165,7 @@ const ContactHelpModal = ({ setContactHelpModal, handleContactHelpSubmit }) => {
 					}}
 					className={`flex-col justify-center items-center bg-white md:w-8/12 lg:w-6/12 h-auto rounded-2xl py-10 px-10 z-50`}>
 					<div className='flex justify-between w-full mb-5'>
-						<div className='text-md font-bold text-brown tracking-wide'>
+						<div className='text-md font-bold text-blue-600 tracking-wide'>
 							{t("Navbar:chfModalTitle")}
 						</div>
 						<button onClick={handleContactHelpClose} className='text-gray-800'>
@@ -195,7 +195,7 @@ const ContactHelpModal = ({ setContactHelpModal, handleContactHelpSubmit }) => {
 								onChange={handleMessageChange}
 								value={message}></textarea>
 						</div>
-						<div className='text-sm font-bold text-brown tracking-wide mt-4'>
+						<div className='text-sm font-bold text-blue-600 tracking-wide mt-4'>
 							{t("Navbar:chfModalScreenshots")}
 						</div>
 						<div className='mt-4 mb-0.5'>
@@ -231,7 +231,7 @@ const ContactHelpModal = ({ setContactHelpModal, handleContactHelpSubmit }) => {
 
 						<div className='mt-3 sm:mt-6'>
 							<button
-								className='w-full bg-brown hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline'
+								className='w-full bg-blue-600 hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline'
 								onClick={handleSubmitButton}
 								type='submit'>
 								{t('Navbar:chfModalSubmit')}

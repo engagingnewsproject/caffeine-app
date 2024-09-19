@@ -136,10 +136,10 @@ const Login = () => {
 			<div className="w-screen h-screen overflow-auto flex justify-center items-start py-12 pb-8">
 				<div className="w-full max-w-sm font-light">
 					<div className="flex flex-col items-center justify-center h-auto mb-2">
-						<div className="bg-brown p-7 rounded-full mb-2">
+						<div className="bg-blue-600 p-7 rounded-full mb-2">
 							<GiCoffeeCup size={30} className="fill-white" />
 						</div>
-						<Typography variant="small" className='text-xs font-semibold text-brown'>Caffiene App</Typography>
+						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffiene App</Typography>
 					</div>
 					<form className="px-8 pt-6 pb-4 mb-4" onSubmit={handleLogin}>
 						<div className="mb-4">
@@ -177,13 +177,13 @@ const Login = () => {
 						)}
 						<div className="mt-5 flex-col items-center content-center">
 							<Button
-							// variant='brown'
+							// variant='blue-600'
 								className="w-full font-bold py-2 mb-4 px-6 rounded focus:outline-none focus:shadow-outline"
 								type="submit">
 								{loading ? (
 									<svg
 										aria-hidden="true"
-										className="m-auto h-4 text-gray-200 animate-spin dark:text-gray-600 fill-brown"
+										className="m-auto h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
 										viewBox="0 0 100 101"
 										fill="none"
 										xmlns="http://www.w3.org/2000/svg">
@@ -212,7 +212,7 @@ const Login = () => {
 								</div>
 								<Link
 									href="/resetPassword"
-									className="inline-block align-baseline font-bold text-sm text-brown hover:text-brown-dark">
+									className="inline-block align-baseline font-bold text-sm text-blue-600 hover:text-blue-600-dark">
 									{t('forgot')}
 								</Link>
 							</div>
@@ -222,13 +222,13 @@ const Login = () => {
 						{t('noAccount')}
 						<Link
 							href="/signup"
-							className="inline-block px-2 align-baseline font-bold text-sm text-brown hover:text-brown-dark">
+							className="inline-block px-2 align-baseline font-bold text-sm text-blue-600 hover:text-blue-600-dark">
 							{t('signupButton')}
 						</Link>
 					</p>
 					{/* <View> */}
 					<div className="flex justify-between items-center p-6 gap-1">
-						<span className="text-brown text-md uppercase font-bold py-2 px-2">
+						<span className="text-blue-600 text-md uppercase font-bold py-2 px-2">
 							{t('select')}
 						</span>
 						<LanguageSwitcher />

@@ -48,7 +48,7 @@ const Headbar = ({ search, setSearch}) => {
                         {customClaims.agency && agencyLogo ? (
                             <Image src={agencyLogo} width={55} height={55} alt="agency logo" className='w-auto'/>
                         ) : (
-                            <div className='bg-brown p-3 rounded-full'>
+                            <div className='bg-blue-600 p-3 rounded-full'>
                                 <GiCoffeeCup className='fill-white' />
                             </div>
                         )}
@@ -82,7 +82,7 @@ const Headbar = ({ search, setSearch}) => {
                         onChange={handleChange}
                         value={search} />
                     <button 
-                    className="py-1 px-1 mt-1 mr-1 absolute right-0 top-0 bg-brown text-white rounded-xl" 
+                    className="py-1 px-1 mt-1 mr-1 absolute right-0 top-0 bg-blue-600 text-white rounded-xl" 
                     type='submit'>
                         <AiOutlineSearch size={25}/>
                     </button>

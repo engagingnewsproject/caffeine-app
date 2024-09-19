@@ -31,7 +31,7 @@ const NewTagModal = ({ tagSystems, tagSystem, list, setNewTagModal, addNewTag })
                         e.stopPropagation()
                     }}>
                     <div className="flex justify-between w-full mb-5">
-                        <div className="text-md font-bold text-brown tracking-wide">{"Add New " + tagSystems[tagSystem]}</div>
+                        <div className="text-md font-bold text-blue-600 tracking-wide">{"Add New " + tagSystems[tagSystem]}</div>
                         <button onClick={() => setNewTagModal(false)} className="text-gray-800">
                             <IoClose size={25}/>
                         </button>
@@ -58,7 +58,7 @@ const NewTagModal = ({ tagSystems, tagSystem, list, setNewTagModal, addNewTag })
                                 Cancel
                             </button>
                             <button
-                                className="bg-white hover:bg-brown hover:text-white text-sm text-blue-500 font-bold py-1.5 px-6 rounded-md focus:outline-none focus:shadow-outline"
+                                className="bg-white hover:bg-blue-600 hover:text-white text-sm text-blue-500 font-bold py-1.5 px-6 rounded-md focus:outline-none focus:shadow-outline"
                                 type="submit">
                                 Add
                             </button>

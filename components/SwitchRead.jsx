@@ -70,7 +70,7 @@ export default function SwitchRead({ setReportModalId }) {
 					// On click handler
 					onClick={() => setReportRead(handleReadChange)}
 					className={`${
-						reportRead ? "bg-brown" : "bg-gray-200"
+						reportRead ? "bg-blue-600" : "bg-gray-200"
 					} relative inline-flex h-6 w-11 items-center rounded-full`}>
 					<span className="sr-only">Mark me</span>
 					<span

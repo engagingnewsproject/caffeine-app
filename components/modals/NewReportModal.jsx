@@ -888,7 +888,7 @@ const NewReportModal = ({
 						}}
 						className={`flex-col justify-center items-center bg-white w-full h-full py-10 px-10 z-50 md:w-8/12 md:h-auto lg:w-6/12 rounded-2xl`}>
 						<div className="flex justify-between w-full mb-5">
-							<div className="text-md font-bold text-brown tracking-wide">
+							<div className="text-md font-bold text-blue-600 tracking-wide">
 								{t('add_report')}
 							</div>
 							<button
@@ -1118,7 +1118,7 @@ const NewReportModal = ({
 							</>
 							<div className="mt-3 sm:mt-6">
 								<button
-									className="w-full bg-brown hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline"
+									className="w-full bg-blue-600 hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline"
 									onClick={handleSubmitClick}
 									type="submit">
 									{t('createReport')}

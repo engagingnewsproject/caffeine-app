@@ -263,7 +263,7 @@ const Agencies = ({handleAgencyUpdateSubmit}) => {
 		section_container: 'w-full h-full flex flex-col px-3 md:px-12 py-5 mb-5 overflow-y-auto',
 		section_wrapper: 'flex flex-col h-full',
 		section_header: 'flex justify-between ml-10 md:mx-0 py-5',
-		section_title: 'text-xl font-extrabold text-brown tracking-wider',
+		section_title: 'text-xl font-extrabold text-blue-600 tracking-wider',
 		section_filters: '',
 		section_filtersWrap: 'p-0 px-4 md:p-4 md:py-0 md:px-4 flex items-center',
 		table_main: 'min-w-full bg-white rounded-xl p-1',
@@ -287,7 +287,7 @@ const Agencies = ({handleAgencyUpdateSubmit}) => {
 						Agencies
 					</div>
 					<div className={style.section_filtersWrap}>
-					{/* <button className={style.button} onClick={handleAddNewAgencyModal}><FaPlus className="text-brown mr-2" size={12}/>Add Agency</button> */}
+					{/* <button className={style.button} onClick={handleAddNewAgencyModal}><FaPlus className="text-blue-600 mr-2" size={12}/>Add Agency</button> */}
 						<Button className="flex items-center gap-3" onClick={handleAddNewAgencyModal}>
 							<FaPlus size={12} />
 							Add Agency

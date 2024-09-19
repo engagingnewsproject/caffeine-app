@@ -111,9 +111,9 @@ const LocationUpdate = ({ user, userData, setUserData }) => {
     sectionContainer: 'w-full h-full flex flex-col mb-5 overflow-visible',
     sectionWrapper: 'flex flex-col',
     button:
-      'bg-brown col-start-3 self-end hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline',
+      'bg-blue-600 col-start-3 self-end hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline',
     buttonHollow:
-      'bg-sky-100 hover:bg-blue-200 text-brown font-normal py-2 px-6 border border-brown rounded-xl',
+      'bg-sky-100 hover:bg-blue-200 text-blue-600 font-normal py-2 px-6 border border-blue-600 rounded-xl',
     input:
       'text-md font-light bg-white rounded-xl p-4 border-none w-full focus:text-gray-700 focus:bg-white focus:border-blue-400 focus:outline-none resize-none',
     inputSelect:
@@ -126,7 +126,7 @@ const LocationUpdate = ({ user, userData, setUserData }) => {
 
   return (
     <div className='m-6'>
-      <div className="text-xl font-extrabold text-brown">
+      <div className="text-xl font-extrabold text-blue-600">
         {t('editLocation')}
       </div>
       {/* List the user's location information */}

@@ -266,10 +266,10 @@ const SignUp = () => {
 			<div className="w-screen h-screen overflow-auto flex justify-center items-start pt-12 pb-8">
 				<div className="w-full max-w-sm font-light">
 					<div className="flex flex-col items-center justify-center mb-2">
-						<div className="bg-brown p-7 rounded-full mb-2">
+						<div className="bg-blue-600 p-7 rounded-full mb-2">
 							<GiCoffeeCup size={30} className="fill-white" />
 						</div>
-						<Typography variant="small" className='text-xs font-semibold text-brown'>Caffiene App</Typography>
+						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffiene App</Typography>
 					</div>
 					<form className="px-8 pt-6 pb-4 mb-4" onSubmit={handleSignUp}>
 						<div className="mb-4">
@@ -433,7 +433,7 @@ const SignUp = () => {
 						{t('haveAccount')}
 						<Link
 							href="/login"
-							className="inline-block px-2 align-baseline font-bold text-sm text-brown hover:text-brown-dark">
+							className="inline-block px-2 align-baseline font-bold text-sm text-blue-600 hover:text-blue-600-dark">
 							{t('login_action')}
 						</Link>
 					</p>

@@ -60,7 +60,7 @@ const UpdatePwModal = ({ setOpenModal }) => {
                     e.stopPropagation()
                 }}>
                     <div className="flex justify-between w-full mb-5">
-                        <div className="text-md font-bold text-brown tracking-wide">{updateSuccess ? t('passwordUpdated') : t('resetPassword')}</div>
+                        <div className="text-md font-bold text-blue-600 tracking-wide">{updateSuccess ? t('passwordUpdated') : t('resetPassword')}</div>
                         <button onClick={() => setOpenModal(false)} className="text-gray-800">
                             <IoClose size={25}/>
                         </button>
@@ -123,7 +123,7 @@ const UpdatePwModal = ({ setOpenModal }) => {
                         <div className="mt-6">
                             <button
                                 disabled={data.newPassword !== data.confirmNewPW || data.newPassword.length > 0 && data.newPassword.length < 8}
-                                className="w-full bg-brown hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline"
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-sm text-white font-semibold py-2 px-6 rounded-md focus:outline-none focus:shadow-outline"
                                 type="submit">
                                 {t('resetPassword')}
                             </button>
