@@ -636,7 +636,7 @@ const ReportSystem = ({
 		return (
 			<IconButton
 				variant='text'
-				color='brown-light'
+				color='brown'
 				onClick={onReportSystemPrevStep}>
 				<IoMdArrowRoundBack size={30} />
 			</IconButton>
@@ -646,7 +646,7 @@ const ReportSystem = ({
 		return (
 			<IconButton
 				variant='text'
-				color='brown-light'
+				color='brown'
 				onClick={() => setReportResetModal(true)}
 				type='button'>
 				<IoMdRefresh size={30} />
