@@ -117,7 +117,7 @@ export const AuthContextProvider = ({children}) => {
       var actionCodeSettings = {
         url: isDevelopment
           ? 'http://localhost:3001/login' // Use localhost during development
-          : 'https://truthsleuthlocal.netlify.app/login', // Use production URL
+          : 'https://caffeine-dashboard.netlify.app/login', // Use production URL
         handleCodeInApp: true,
       };
 
@@ -264,7 +264,7 @@ export const AuthContextProvider = ({children}) => {
 		const isLocalhost = window.location.hostname === 'localhost'
 		const baseUrl = isLocalhost
 			? 'http://localhost:3001/signup'
-			: 'https://truthsleuthlocal.netlify.app/signup'
+			: 'https://caffeine-dashboard.netlify.app/signup'
 
 		var actionCodeSettings = {
 			// URL you want to redirect back to. The domain for this URL must be whitelisted in the Firebase Console.
