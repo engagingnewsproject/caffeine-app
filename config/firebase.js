@@ -41,15 +41,13 @@ if (typeof window !== 'undefined') {
   perf = getPerformance(app);
   // Initialize App Check with ReCaptcha Enterprise
   // Docs: https://firebase.google.com/docs/app-check/web/debug-provider?authuser=0
-  if (process.env.NODE_ENV === 'development') {
-    self.FIREBASE_APPCHECK_DEBUG_TOKEN = true
-  } else {
+  if (process.env.NODE_ENV !== 'development') {
     self.FIREBASE_APPCHECK_DEBUG_TOKEN = process.env.NEXT_PUBLIC_FIREBASE_APPCHECK_DEBUG_TOKEN
+    initializeAppCheck(app, {
+        provider: new ReCaptchaV3Provider(process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_SITE_KEY),
+        isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
+    });
   }
-  initializeAppCheck(app, {
-      provider: new ReCaptchaV3Provider(process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_SITE_KEY),
-      isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
-  });
 }
 
 export { app, analytics, perf }
