@@ -5,34 +5,157 @@ Misinfo Dashboard is a Next.js project bootstrapped with create-next-app.
 
 ### Getting Started
 
-Clone the [caet-saga/misinfo-dashboard](https://github.austin.utexas.edu/caet-saga/misinfo-dashboard) development GitHub repo to a directory on your local computer.
+#### 1. Clone repo
+
+Clone the [caffiene-app](https://github.com/engagingnewsproject/caffeine-app.git) repo to a directory on your local computer (ex. `~/username/sites/`).
+
+- From the command line in your project root run:
+
+    ```
+    git clone https://github.com/engagingnewsproject/caffeine-app.git
+    ```
+
+#### 2. Install Dependencies
+
+
+**Node Version**
+
+At this time of writing (April 26, 2024) the latest working update is at Node v20.12.2. Ensure this is the version by running `node -v`. If you are not on that Node version check out this article to set the correct Node version: [Easily switch between multiple Node versions without using nvm](https://dev.to/andreasbergstrom/easily-switch-between-multiple-node-versions-without-using-nvm-52k9).
+
+**Yarn**
+
+Install/update [`yarn`](https://yarnpkg.com/) package manager on your machine ([installation docs](https://yarnpkg.com/getting-started/install))
+  
+- Enable [Corepack](https://yarnpkg.com/corepack), if it isn't already; this will add the `yarn` binary to your PATH:
+
+    ```
+    corepack enable
+    ```
+
+- Set the yarn version by running:
+
+    ```
+    yarn set version 1.22.1
+    ```
+
+- From the root of the project install dependencies by running:
+        
+    ```
+    yarn install
+    ```
+  
+    > _**Why not `npm install`?** Glad you asked! [Netlify](https://www.netlify.com/), the service that hosts the dashboard, will not allow us to upload updates because `npm install` creates a `package-lock.json` file. Netlify doesn't like `package-lock.json` files._
+
+Then from the root of the project install dependencies by running:
+
 ```
-git clone https://github.austin.utexas.edu/caet-saga/misinfo-dashboard.git
+yarn
 ```
 
-#### Install Dependencies
+#### 3. Add Firebase configuration
+
+In order to be authenticated with the Firebase Project you must have the `.env` file (which contains the Firebase credentials) at the root of your project. To get the contents of the `.env` file reach out to the project lead (currently [Luke](https://github.com/luukee)).
+
+### 4. Install Firebase Emulator
+
+Firebase Emulator is included in the [Firebase Tools](https://www.npmjs.com/package/firebase-tools) package. You can install Firebase Tools by running:
 
 ```
-npm install
+curl -sL firebase.tools | bash
 ```
 
-#### Run the Development Server
+See [Emulator Tips](https://github.com/engagingnewsproject/misinfo-dashboard?tab=readme-ov-file#emulator-tips) for more info.
+
+#### 4. Run the Development Server
 
 1. Start the development server.
-
-npm
-
-```
-npm run dev
-```
-
-yarn
 
 ```
 yarn dev
 ```
 
-Visit http://localhost:3000 to view your application.
+This will boot up the [Firebase Emulator](https://firebase.google.com/docs/emulator-suite) and the NextJS server. Visit the localhost URL listed in your terminal to view your application.
+
+> _If you open `http://localhost:3000` and you see the "unhandled error" `FirebaseError: Failed to get document because the client is offline.` this means you have not started the Firebase Emulator. Return to step #4 to Install and run the Firebase Emulator._
+
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. If you have the emulator running you will see a banner `Running in emulator mode. Do not use with production credentials.` at the bottom of your screen as well as Console log messages letting you know that the emulator is running:
+
+![emulator-running](https://media.github.austin.utexas.edu/user/3619/files/fa9f1c63-1f3a-4dd2-b0d3-2ca3ab6b86f0)
+
+> NOTE: You will have 2 terminal tabs running while developing:
+- > 1 terminal tab for `yarn dev` (or `npm run dev`), 
+- > 1 terminal tab for `firebase emulators:start --import=./emulator-data`. 
+
+> NOTE: You will also have 2 browser tabs open while developing:
+- > 1 browser tab for `localhost:3000` (actual caffeine-app dashboard), 
+- > 1 browser tab for "Firebase Emulator Suite" 
+
+Develop away! And good luck :)
+
+## Emulator Tips:
+
+> _If you get `command not found` you might have to be added as a user for the Firebase project. Contact the lead developer to do this for you. Or contact mediaengagement@austin.utexas.edu_
+
+The Firebase Emulator should boot up and provide you an emulator link (look for `View Emulator UI at` in your command line output). 
+
+Open that link to view the Emulator UI:
+
+![emulator-ui](https://media.github.austin.utexas.edu/user/3619/files/1012c2ee-b9b2-4529-8914-2e0455af9bda)
+
+**See Emulator Tips** for more info.
+
+### Add yourself as a user via the "Emulator Authentication" tab. 
+
+#### Two options:
+
+1. Option one: Manually add yourself
+
+   From the Firebase Emulator UI select the "Emulator Authentication" tab and click "Add user". Only required fields are: `name`, `email` and `password`. Change your role? see _Available user roles_ below.
+
+2. Option two: Sign up.
+
+   You can also signup like a normal user at the Login/Signup page. Once you have signed up:
+
+    - Open the link printed out in your Emulator terminal window. 
+      - **_all you need to do is open the link._ Once you've opened the link close the tab and...
+    - Return to your initial Signup tab and login with the credentials you signed up with. Change your role? see _Available user roles_ below.
+
+#### Available user roles:
+
+- *General User:*
+    
+    No additional configuration required.
+    
+- *Agency User:*
+
+    In the "Custom Claims" input enter `{"agency":true}` & save.
+
+- *Admin User:*
+
+    In the "Custom Claims" input enter `{"admin":true}` & save.
+    
+
+#### Emulator UI
+- Database: find the imported database under the Emulator UI / Firestore tab.
+- Users: view, add, edit & delete users under the Authentication tab.
+- Files & Uploads: Storage tab in the Emulator UI.
+
+#### Users
+
+Your user UID that you created will not be associated with any reports or agencies so you can either add reports via the Caffeine App in your localhost:3000 window or go into the Emulator UI and manually change the `userID` to your own for some reports. Same idea with assigning your user to an agency: go into the Emulator UI and add your email to an agency's `agencyUsers` field.
+
+#### Emulator log files
+
+Emulator creates log files (`firebase-debug.log` & `ui-debug.log`) when you boot up the emulator. No need to push those with git. 
+
+#### Export your local emulator data
+
+The Firebase emulator allows you to export data from your running emulator instance. If you want to stash a baseline set of data, auth profiles you have set up in your running emulator instance.
+
+`firebase emulators:export ./emulator-data`
+
+This command will export the running emulator instance's auth profiles, firestore data and storage files to the `/emulator-data` folder. **Recommended** to not commit the `/emulator-data` changed files as to not alter the baseline Emulator data.
 
 ### Useful Development Tools
 
@@ -47,6 +170,7 @@ Visit http://localhost:3000 to view your application.
 [VS Code Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
 
 - Tailwind CSS IntelliSense enhances the Tailwind development experience by providing Visual Studio Code users with advanced features such as autocomplete, syntax highlighting, and linting.
+
 
 ## Project Structure
 
@@ -208,9 +332,9 @@ Line chart that plots the number of reports for the selected topic reports withi
 | components/ComparisonGraphPlotted.jsx | Line graph that displays the plotted number of reports for the selected report topics within the selected date range. |
 | components/ComparisonGraphMenu.jsx | Menu bar that allows users to change parameters for the line chart and refresh the chart with the new selection. |
 
-# Components
+## Components
 
-## Share
+### Share
 
 Redirects to default email client with link to the report
 
@@ -221,7 +345,7 @@ Files |
 ------|
  `pages/dashboard/reports/[reportId].jsx` |
  
- ## New Report
+### New Report
  
 Allows users to create new reports through popup modal, not a separate page.
 
@@ -233,22 +357,22 @@ Files |
 ------|
  `components/modals/NewReportModal.jsx` |
  
-## Report Tags
+### Report Tags
 
-## Graph Toggle
+### Graph Toggle
 
 Switches between graph views
 - Graph views use react charts library.
-### Top 3 Trending Topics Overview Graph
+#### Top 3 Trending Topics Overview Graph
 Bar graph that displays the number of reports from the previous day for the top 3 trending topics
 
 - Can choose a specific date range as well.
 
-## Report List
+### Report List
 
 Displays list of most recent reports in firebase.
 
-## Modals
+### Modals
 
 Files    |          |
 ---------|----------
@@ -317,7 +441,7 @@ When writing a query or requesting data, it's best to get just what you need (or
 #### Keep things organized
 - Look at the existing code base and see if it makes sense for code to be in one place or another. If it doesn't have an obvious place, create a new file using the existing standards of the code.
 
-# Git usage
+## Git usage
 
 Important things to remember:
 
@@ -329,7 +453,7 @@ Important things to remember:
 
 After changes have been pushed to the [Dev Site](https://dev-misinfo-dashboard.netlify.app/) send a link to Kat for review.
 
-## Quick Guide
+### Quick Guide
 
 1. When you take on a task:
 2. Go to the applicable [Github repo](https://github.com/engagingnewsproject/misinfo-dashboard) and choose the issue to work on
@@ -373,7 +497,7 @@ After changes have been pushed to the [Dev Site](https://dev-misinfo-dashboard.n
 
    - It will either be merged or comments will be left so you can finish up the issue. Go ahead and repeat from #1 while you wait for the review.
 
-## Branching
+### Branching
 
 **Quick Legend**
 
@@ -412,7 +536,7 @@ After changes have been pushed to the [Dev Site](https://dev-misinfo-dashboard.n
   </tr>
 </table>
 
-## Main Branches
+### Main Branches
 
 The main repository will always hold two evergreen branches:
 
@@ -425,7 +549,7 @@ Consider `origin/prod` to always represent the latest code deployed to productio
 
 When the source code in the `main` branch is stable and has been deployed, all of the changes will be merged into `prod`.
 
-## Supporting Branches
+### Supporting Branches
 
 Supporting branches are used to aid parallel development between team members, ease tracking of features, and to assist in quickly fixing live production problems. Unlike the main branches, these branches always have a limited life time, since they will be removed eventually.
 
@@ -437,7 +561,7 @@ The different types of branches we may use are:
 
 Each of these branches have a specific purpose and are bound to strict rules as to which branches may be their originating branch and which branches must be their merge targets. Each branch and its usage is explained below.
 
-## Feature Branches
+### Feature Branches
 
 Feature branches are used when developing a new feature or enhancement which has the potential of a development lifespan longer than a single deployment. When starting development, the deployment in which this feature will be released may not be known. No matter when the feature branch will be finished, it will always be merged back into the main branch.
 
@@ -472,7 +596,7 @@ $ git push origin main                              // push merge changes
 $ git push origin :feature-id                       // deletes the remote branch
 ```
 
-## Bug Branches
+### Bug Branches
 
 Bug branches differ from feature branches only semantically. Bug branches will be created when there is a bug on the live site that should be fixed and merged into the next deployment. For that reason, a bug branch typically will not last longer than one deployment cycle. Additionally, bug branches are used to explicitly track the difference between bug development and feature development. No matter when the bug branch will be finished, it will always be merged back into `main`.
 
@@ -508,7 +632,7 @@ $ git push origin main                              // push merge changes
 $ git push origin :bug-id                           // deletes the remote branch
 ```
 
-## Hotfix Branches
+### Hotfix Branches
 
 A hotfix branch comes from the need to act immediately upon an undesired state of a live production version. Additionally, because of the urgency, a hotfix is not required to be be pushed during a scheduled deployment. Due to these requirements, a hotfix branch is always branched from a tagged `main` branch. This is done for two reasons:
 
@@ -548,7 +672,7 @@ $ git push origin main                              // push merge changes
 $ git push origin :hotfix-id                        // deletes the remote branch
 ```
 
-## `git` commands
+### `git` commands
 
 See where your local files are at
 
@@ -588,3 +712,98 @@ Add all files to commit
 Set remote repository URL
 
     git remote add origin https://github.com/engagingnewsproject/misinfo-dashboard.git
+
+
+## More on Firebase
+
+#### Firebase Creds
+
+With proper permissions access Firebase Console or Firebase Cloud Console.
+
+- Firebase project name: Caffeine App
+- Firebase project ID: caffeine-app-d8cd8
+- Firebase project #: 192976628738
+
+#### Firebase Storage
+
+- Firebase storage name: caffeine-app-d8cd8.appspot.com
+
+Links: [Chrome React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) || [VS Code React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets) || [VS Code Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+## Deploy to Netlify
+
+#### Deploy to dev
+Link: https://dev-caffeine-app.netlify.app/
+
+To push all changes to the dev site on Netlify using the [Engaging News Project's caffeine-app](https://github.com/engagingnewsproject/caffeine-app) repo's `dev` branch.
+
+_The `dev` branch is the branch that contains the dev live site code._
+
+1.  Checkout the `dev` branch
+
+    `git checkout dev`
+    
+2.  Merge changes from `main` to `dev`
+
+    `git marge main`
+    
+3. Push the merge into `dev`
+
+    `git push origin dev`
+    
+4.  Open the [Netlify UI for the dev site](https://app.netlify.com/sites/dev-misinfo-dashboard/deploys) and monitor the progress. Make sure the top bar has `dev-misinfo-dashboard` active. On the left sidebar navigate to the "Deploys" link. Your latest push will be listed at the top.
+    
+#### Deploy to prod
+Link: https://misinfo-dashboard.netlify.app/
+
+To push all changes to the live site on Netlify using the [Engaging News Project's misinfo-dashboard](https://github.com/engagingnewsproject/misinfo-dashboard) repo's `dev` branch.
+
+_The `prod` branch is the branch that contains the live site code._
+
+1.  Checkout the `main` branch
+
+    `git checkout main`
+    
+2.  Merge changes from `dev` into `main`
+
+    `git marge dev`
+    
+3. Push the merge into `main`
+
+    `git push origin main`
+    
+4.  Checkout the `prod` branch
+
+    `git checkout prod`
+
+5. Merge `main` into `prod`
+
+    `git merge main`
+    
+6. Push the merge into `prod`
+
+    `git push origin prod`
+    
+7.  Open the [Netlify UI for the prod site](https://app.netlify.com/sites/misinfo-dashboard/deploys) and monitor the progress. Make sure the top bar has `misinfo-dashboard` active. On the left sidebar navigate to the "Deploys" link. Your latest push will be listed at the top.
+    
+#### Deploy issues
+
+If you get the below error you will need to install [Git Large File Storage](https://git-lfs.com/).
+
+```
+remote: error: File firestore-debug.log is 102.65 MB; this exceeds GitHub's file size limit of 100.00 MB
+``` 
+
+To install:
+
+`git lfs install` - make sure git large file storage is installed
+
+`git lfs track "firestore-debug.log"` - to track the large file
+
+`git lfs migrate import --include="firestore-debug.log" --everything` - convert the file types to LFS
+
+`git lfs ls-files` - to list files
+
+`git lfs checkout` -  files can be repopulated with their full expected contents [lfs docs](https://github.com/git-lfs/git-lfs/blob/main/docs/man/git-lfs-migrate.adoc?utm_source=gitlfs_site&utm_medium=doc_man_migrate_link&utm_campaign=gitlfs#examples)
+
+Project Lead Links: [Firebase CLI Tools](https://firebase.google.com/docs/firestore/security/get-started#use_the_firebase_cli) || [Firebase Console](https://console.firebase.google.com/) || [Firebase Cloud Console](https://console.cloud.google.com/welcome?project=misinfo-5d004) || [Syncing a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-command-line) || [Netlify dashboard](https://app.netlify.com/sites/misinfo-dashboard/overview) || [ENP Prod Repo](https://github.com/engagingnewsproject/misinfo-dashboard-prod)
