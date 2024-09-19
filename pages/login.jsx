@@ -95,7 +95,7 @@ const Login = () => {
         // console.log("Email not verified. Sending verification email...")
         await verifyEmail(auth.currentUser)
         const isLocalhost = window.location.hostname === 'localhost';
-        const verifyEmailRoute = isLocalhost ? "http://localhost:3000/verifyEmail" : "/verifyEmail";
+        const verifyEmailRoute = isLocalhost ? "http://localhost:3001/verifyEmail" : "/verifyEmail";
 
         await router.push(verifyEmailRoute);
       }
