@@ -70,7 +70,11 @@ const Login = () => {
         const dbInstance = collection(db, 'agency');
         const q = query(dbInstance, where("agencyUsers", "array-contains", data.email));
         const querySnapshot = await getDocs(q)
-
+				// TEMP GIVE USER ADMIN
+				// first add `addAdminRole` to `useAuth()`
+				// log out, uncomment line below, login: admin role given to your user. make sure you comment the line out again after login.
+				// const response = await addAdminRole({ email: data.email })
+				// console.log(response.data.message)
         // adds agency role to current user if their email is in an agency users array
         if (!querySnapshot.empty && !idTokenResult.claims.agency) {
           await addAgencyRole({ email: data.email })
