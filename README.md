@@ -45,7 +45,25 @@ To boot up the development server and Firebase Emulator run:
 yarn dev
 ```
 
-This will boot up the [Firebase Emulator](https://firebase.google.com/docs/emulator-suite) and the NextJS server. Visit the localhost URL listed in your terminal to view your application.
+This command will boot up the [Firebase Emulator UI](https://firebase.google.com/docs/emulator-suite) and the NextJS server. Look over your terminal output and click the Emulator links (Emulator UI) and localhost link. 
+
+#### Emulator Users
+
+The emulator has 3 user accounts already set up. You can log in with any of them. Each login has different permissions so the layout will change based on who you are logged in with.
+
+**User:**
+- email: user@user.com
+- pass: devPassword
+  
+**Agency user:**
+- email: agency@user.com
+- pass: devPassword
+  
+**Admin user:**
+- email: admin@user.com
+- pass: devPassword
+
+You can also sign up with totally different info (email, name, city, state ect.). When you sign up a authorization link will print out in your terminal. You will need to click that link to verify. After you click the link you can close the window that open's (its only for verification) and return to your localhost window to log in.
 
 ## Firebase Functions
 
