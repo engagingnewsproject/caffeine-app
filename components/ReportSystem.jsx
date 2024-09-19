@@ -626,7 +626,7 @@ const ReportSystem = ({
 		return (
 			<IconButton
 				variant='text'
-				color='brown'
+				color='blue'
 				onClick={() => setReportSystem(reportSystem + 1)}>
 				<IoMdArrowRoundForward size={30} />
 			</IconButton>
@@ -636,7 +636,7 @@ const ReportSystem = ({
 		return (
 			<IconButton
 				variant='text'
-				color='brown'
+				color='blue'
 				onClick={onReportSystemPrevStep}>
 				<IoMdArrowRoundBack size={30} />
 			</IconButton>
@@ -646,7 +646,7 @@ const ReportSystem = ({
 		return (
 			<IconButton
 				variant='text'
-				color='brown'
+				color='blue'
 				onClick={() => setReportResetModal(true)}
 				type='button'>
 				<IoMdRefresh size={30} />
@@ -665,7 +665,7 @@ const ReportSystem = ({
 							alt='reminderShow'
 							className='object-cover w-auto'
 						/>
-						<Typography variant='h5' color='brown'>
+						<Typography variant='h5' color='blue'>
 							{t("reminder")}
 						</Typography>
 						<Typography>{t("description")}</Typography>
@@ -684,7 +684,7 @@ const ReportSystem = ({
 								<Typography color='black'>{t("incorrect")}</Typography>
 							</ListItem>
 						</List>
-						<Button onClick={onReminderStart} color='brown'>
+						<Button onClick={onReminderStart} color='blue'>
 							{t("start")}
 						</Button>
 						{/* DO NOT SHOW AGAIN CHECKBOX */}
@@ -693,7 +693,7 @@ const ReportSystem = ({
 								onChange={onChangeCheckbox}
 								checked={disableReminder}
 								label={t("noShow")}
-								color='brown'
+								color='blue'
 							/>
 						</div>
 					</div>
@@ -1007,14 +1007,14 @@ const ReportSystem = ({
 							<Card className={globalStyles.form.view}>
 								{/* Title */}
 								<div className='mb-6 p-0'>
-									<Typography variant='h6' color='brown'>
+									<Typography variant='h6' color='blue'>
 										{t("title_text")}
 									</Typography>
 									<Typography>{title}</Typography>
 								</div>
 								{/* Links */}
 								<div className='mb-6 p-0'>
-									<Typography variant='h6' color='brown'>
+									<Typography variant='h6' color='blue'>
 										{t("links")}
 									</Typography>
 									<Typography>
@@ -1031,7 +1031,7 @@ const ReportSystem = ({
 								</div>
 								{/* Image upload */}
 								<div className='mb-6 p-0'>
-									<Typography variant='h6' color='brown'>
+									<Typography variant='h6' color='blue'>
 										{t("image")}
 									</Typography>
 									<div className='flex w-full overflow-y-auto'>
@@ -1054,14 +1054,14 @@ const ReportSystem = ({
 								</div>
 								{/* Details */}
 								<div className='mb-6 p-0'>
-									<Typography variant='h6' color='brown'>
+									<Typography variant='h6' color='blue'>
 										{t("detailed")}
 									</Typography>
 									<Typography>
 										{detail ? detail : `No description provided.`}
 									</Typography>
 								</div>
-								<Button color='brown' onClick={() => setReportSystem(0)}>
+								<Button color='blue' onClick={() => setReportSystem(0)}>
 									{t("backReports")}
 								</Button>
 							</Card>
