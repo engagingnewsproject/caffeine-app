@@ -88,7 +88,7 @@ const ReportDetails = () => {
 	}, [info])
 
 	function SendLinkByMail(href) {
-    var subject= "Caffeine App";
+    var subject= "Caffeine Dashboard";
     var body = "Link to report:\r\n";
     body += window.location.href;
     var uri = "mailto:?subject=";

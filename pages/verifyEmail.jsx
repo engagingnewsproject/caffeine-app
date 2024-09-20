@@ -47,7 +47,7 @@ const VerifyEmail = () => {
   return (
 		<>
 			<Head>
-				<title>Verify Email | Caffiene App</title>
+				<title>Verify Email | Caffeine Dashboard</title>
 			</Head>
 			<div className="w-screen h-screen flex justify-center items-center">
 				<div className="w-full max-w-sm font-light">

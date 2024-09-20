@@ -4,7 +4,7 @@
     "display": "fullscreen",
     "scope": "/",
     "start_url": "/login",
-    "name": "Caffeine App",
+    "name": "Caffeine Dashboard",
     "id": "/login",
     "short_name": "CaffeineApp",
     "description": "Report caffeine usage in your location.",

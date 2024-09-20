@@ -128,11 +128,11 @@ const SignUp = () => {
                   they have no real profile
                   -- or at least that is what my testing has shown.
                   1) Admin user adds a new agency
-                  2) user's email is sent email subject:"Sign in to Caffeine App requested"
+                  2) user's email is sent email subject:"Sign in to Caffeine Dashboard requested"
                   3) user clicks link in email
                   4) signup.jsx page with "** Must be the email you were sent the invite." text under Email input.
                   5) user submits
-                  6) user's email is sent "Verify your email for Caffeine App"
+                  6) user's email is sent "Verify your email for Caffeine Dashboard"
                   7) user clicks link
                   8) verifyEmail.jsx page
                   9) user clicks link
@@ -261,7 +261,7 @@ const SignUp = () => {
 	return (
 		<>
 			<Head>
-				<title>Signup | Caffiene App</title>
+				<title>Signup | Caffeine Dashboard</title>
 			</Head>
 			<div className="w-screen h-screen overflow-auto flex justify-center items-start pt-12 pb-8">
 				<div className="w-full max-w-sm font-light">
@@ -269,7 +269,7 @@ const SignUp = () => {
 						<div className="bg-blue-600 p-7 rounded-full mb-2">
 							<GiCoffeeCup size={30} className="fill-white" />
 						</div>
-						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffiene App</Typography>
+						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffeine Dashboard</Typography>
 					</div>
 					<form className="px-8 pt-6 pb-4 mb-4" onSubmit={handleSignUp}>
 						<div className="mb-4">

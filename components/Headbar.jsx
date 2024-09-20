@@ -56,7 +56,7 @@ const Headbar = ({ search, setSearch}) => {
                     <div className="text-md font-semibold px-4 tracking-wide">
                         {customClaims.admin && (
                             <>
-                                Caffiene App
+                                Caffeine Dashboard
                                 <div className='text-sm font-normal'>ADMIN DASHBOARD</div>
                             </>
                         )}
@@ -67,7 +67,7 @@ const Headbar = ({ search, setSearch}) => {
                             </>
                         )}
                         {!customClaims.agency && !customClaims.admin && (
-                            <>Caffiene App</>
+                            <>Caffeine Dashboard</>
                         )}
                     </div>
                 </div>

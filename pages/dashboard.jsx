@@ -79,7 +79,7 @@ const Dashboard = () => {
 	return (
 		<>
 			<Head>
-				<title>Dashboard | Caffiene App</title>
+				<title>Dashboard | Caffeine Dashboard</title>
 			</Head>
 			<div className="w-full">
 				<Navbar

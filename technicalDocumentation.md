@@ -143,7 +143,7 @@ Open that link to view the Emulator UI:
 
 #### Users
 
-Your user UID that you created will not be associated with any reports or agencies so you can either add reports via the Caffeine App in your localhost:3000 window or go into the Emulator UI and manually change the `userID` to your own for some reports. Same idea with assigning your user to an agency: go into the Emulator UI and add your email to an agency's `agencyUsers` field.
+Your user UID that you created will not be associated with any reports or agencies so you can either add reports via the Caffeine Dashboard in your localhost:3000 window or go into the Emulator UI and manually change the `userID` to your own for some reports. Same idea with assigning your user to an agency: go into the Emulator UI and add your email to an agency's `agencyUsers` field.
 
 #### Emulator log files
 
