@@ -131,7 +131,7 @@ const Login = () => {
   return (
 		<>
 			<Head>
-				<title>Login | Caffiene App</title>
+				<title>Login | Caffeine App</title>
 			</Head>
 			<div className="w-screen h-screen overflow-auto flex justify-center items-start py-12 pb-8">
 				<div className="w-full max-w-sm font-light">
@@ -139,7 +139,7 @@ const Login = () => {
 						<div className="bg-blue-600 p-7 rounded-full mb-2">
 							<GiCoffeeCup size={30} className="fill-white" />
 						</div>
-						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffiene App</Typography>
+						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffeine App</Typography>
 					</div>
 					<form className="px-8 pt-6 pb-4 mb-4" onSubmit={handleLogin}>
 						<div className="mb-4">

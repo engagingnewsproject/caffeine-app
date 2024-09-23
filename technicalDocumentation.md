@@ -7,7 +7,7 @@ Misinfo Dashboard is a Next.js project bootstrapped with create-next-app.
 
 #### 1. Clone repo
 
-Clone the [caffiene-app](https://github.com/engagingnewsproject/caffeine-app.git) repo to a directory on your local computer (ex. `~/username/sites/`).
+Clone the [caffeine-app](https://github.com/engagingnewsproject/caffeine-app.git) repo to a directory on your local computer (ex. `~/username/sites/`).
 
 - From the command line in your project root run:
 

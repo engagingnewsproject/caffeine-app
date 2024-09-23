@@ -261,7 +261,7 @@ const SignUp = () => {
 	return (
 		<>
 			<Head>
-				<title>Signup | Caffiene App</title>
+				<title>Signup | Caffeine App</title>
 			</Head>
 			<div className="w-screen h-screen overflow-auto flex justify-center items-start pt-12 pb-8">
 				<div className="w-full max-w-sm font-light">
@@ -269,7 +269,7 @@ const SignUp = () => {
 						<div className="bg-blue-600 p-7 rounded-full mb-2">
 							<GiCoffeeCup size={30} className="fill-white" />
 						</div>
-						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffiene App</Typography>
+						<Typography variant="small" className='text-xs font-semibold text-blue-600'>Caffeine App</Typography>
 					</div>
 					<form className="px-8 pt-6 pb-4 mb-4" onSubmit={handleSignUp}>
 						<div className="mb-4">

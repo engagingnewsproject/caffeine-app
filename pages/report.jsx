@@ -123,7 +123,7 @@ const Report = () => {
 	return (
 		<>
 			<Head>
-				<title>Report | Caffiene App</title>
+				<title>Report | Caffeine App</title>
 			</Head>
 			<div className={style.pageContainer}>
 				<Navbar

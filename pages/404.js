@@ -31,7 +31,7 @@ export default function Custom404() {
   return (
 		<>
 			<Head>
-				<title>Not Found | Caffiene App</title>
+				<title>Not Found | Caffeine App</title>
 			</Head>
 			<div className="flex flex-col gap-2 items-center justify-center h-screen">
 				<Typography variant="h2">404 - Page Not Found</Typography>
