@@ -73,10 +73,10 @@
   "topic": "Tema",
   "noAgencies":"There are no participating newsrooms in this area.",
   "topics": {
-    "Health": "Salud",
-    "Weather": "Clima",
+    "Soda": "Salud",
+    "Coffee": "Clima",
     "Other": "Otro",
-    "Politics":"Política"
+    "EnergyDrink":"Política"
   },
   "sources": {
   "Social": "Social",

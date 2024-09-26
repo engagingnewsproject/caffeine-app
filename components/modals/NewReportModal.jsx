@@ -309,7 +309,7 @@ const NewReportModal = ({
         if (!docSnap.exists()) {
           console.log('Creating default tags for agency')
           // Create default tags if they don't exist
-          const defaultTopics = ['Health', 'Other', 'Politics', 'Weather']
+          const defaultTopics = ['Soda', 'Other', 'EnergyDrink', 'Coffee']
           const defaultSources = ['Newspaper', 'Other/Otro', 'Social', 'Website']
           const defaultLabels = ['Important', 'Flagged']
 
@@ -486,7 +486,7 @@ const NewReportModal = ({
 			// create tags collection if current agency does not have one
 			if (!docRef.exists()) {
 				console.log('Need to create tag collection for agency. ')
-				const defaultTopics = ['Health', 'Other', 'Politics', 'Weather'] // tag system 1
+				const defaultTopics = ['Soda', 'Other', 'EnergyDrink', 'Coffee'] // tag system 1
 				const defaultSources = ['Newspaper', 'Other/Otro', 'Social', 'Website'] // tag system 2
 				const defaultLabels = ['Important', 'Flagged'] // tag system 3
 

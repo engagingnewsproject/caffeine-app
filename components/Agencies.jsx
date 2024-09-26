@@ -112,7 +112,7 @@ const Agencies = ({handleAgencyUpdateSubmit}) => {
 				// When user signs in from the email they recieved,
 				// they will added to the mobileUsers database collection
 				setEmailSent(true)
-        const defaultTopics = ["Health","Other","Politics","Weather"] // tag system 1
+        const defaultTopics = ["Soda","Other","EnergyDrink","Coffee"] // tag system 1
         const defaultSources = ["Newspaper", "Other/Otro","Social","Website"] // tag system 2
         const defaultLabels = ["Important", "Flagged"] // tag system 3
 

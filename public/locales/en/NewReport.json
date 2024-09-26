@@ -3,7 +3,7 @@
   "description":
     "This system is only for reports of caffeinated beverage advertisements.",
   "example": "Example:",
-  "correct": "Ads for coffee, soda, or energy drinks.",
+  "correct": "Ads for coffee, soda, or EnergyDrinks.",
   "incorrect": "Ads for milk, sparkling water, or juice.",
   "start": "Start",
   "noShow": "Do not show this again.",
@@ -67,10 +67,10 @@
   "thankyou": "Thank you",
   "noAgencies":"There are no participating newsrooms in this area.",
   "topics": {
-    "Health": "Health",
-    "Weather": "Weather",
+    "Soda": "Soda",
+    "Coffee": "Coffee",
     "Other": "Other",
-    "Politics":"Politics"
+    "EnergyDrink":"EnergyDrink"
   },
   "sources": {
     "Social": "Social",
