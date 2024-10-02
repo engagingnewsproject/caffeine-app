@@ -107,7 +107,7 @@ const ReportSystem = ({
 	const [refresh, setRefresh] = useState(false)
 	const formRef = useRef(null)
 
-  const defaultTopics = ["Health","Other","Politics","Weather"] // tag system 1
+  const defaultTopics = ["Soda","Other","EnergyDrink","Coffee"] // tag system 1
   const defaultSources = ["Newspaper", "Other","Social","Website"] // tag system 2
   const defaultLabels = ["Important", "Flagged"] // tag system 3
 
@@ -291,7 +291,7 @@ const ReportSystem = ({
        // create tags collection if current agency does not have one
        if (!docRef.exists()) {
           // console.log("Need to create tag collection for agency. ")
-          const defaultTopics = ["Health","Other","Politics","Weather"] // tag system 1
+          const defaultTopics = ["Soda","Other","EnergyDrink","Coffee"] // tag system 1
           const defaultSources = ["Newspaper", "Other","Social","Website"] // tag system 2
           const defaultLabels = ["Important", "Flagged"] // tag system 3
 
