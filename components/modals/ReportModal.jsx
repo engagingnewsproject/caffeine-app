@@ -176,7 +176,7 @@ const ReportModal = ({
 										<div className='flex flex-row mb-3 items-center'>
 											<RiMessage2Fill size={20} />
 											<div className='font-semibold px-2 self-center pr-4'>
-												Tag
+												Product
 											</div>
 											<div className='text-md font-light'>{report.topic}</div>
 										</div>
