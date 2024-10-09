@@ -88,8 +88,8 @@ const ReportSystem = ({
 	const [detailError, setDetailError] = useState(false)
 	const [allTopicsArr, setAllTopicsArr] = useState([])
 	const [agencies, setAgencies] = useState([])
-	const [selectedAgency, setSelectedAgency] = useState("")
-  const [agencyID, setSelectedAgencyID] = useState("");
+	const [selectedAgency, setSelectedAgency] = useState("Test Agency")
+  const [agencyID, setSelectedAgencyID] = useState("i2ef53bVPh9xciy0huIR");
 
 	const [selectedTopic, setSelectedTopic] = useState("")
 	const [sources, setSources] = useState([])
@@ -114,8 +114,8 @@ const ReportSystem = ({
 	// useEffect(() => {
 	// 	console.log('Authenticated user:', user);
 	// }, [])
-	
-	
+
+
 	// On page load (mount), update the tags from firebase
 	useEffect(() => {
 		getUserData()
@@ -135,7 +135,7 @@ const ReportSystem = ({
 		const newReportRef = doc(collection(db, "reports"))
 		setReportId(newReportRef.id) // set report id
 		console.log(newReportRef.id);
-		
+
 		setDoc(newReportRef, {
 			userID: user.accountId,
 			state: userData.state.name,
@@ -197,70 +197,73 @@ const ReportSystem = ({
 			console.log(error)
 		}
 	}
-	// 
+	//
 	useEffect(() => {
 		// console.log(reportSystem);
 		if (reportSystem >= 2) {
 			getAllSources()
 		}
 	},[allTopicsArr])
-	
+
   // When agency is selected, keep track of agency ID
   useEffect(()=> {
-    if (selectedAgency != "") {
+    // if (selectedAgency != "") {
 
-      
-      const agencyCollection = collection(db,"agency")
-      // console.log(user)
 
-      // If current user is an agency, determine which agency
-      
-      const q = query(agencyCollection, where("name", "==", selectedAgency), where("state","==", userData.state.name))
-      let agencyId;
-      getDocs(q).then((querySnapshot) => {       
-        querySnapshot.forEach((docAgency) => { // Set initial values
-          // console.log("im here")
-          agencyId = docAgency.id
-          // console.log(agencyId)
-          setSelectedAgencyID(agencyId)
-          // console.log(agencyId)
-          const docRef = doc(db, 'tags', agencyId)
-          getDoc(docRef).then((docSnap)=> {
-        // TODO: test to make sure not null
+    //   const agencyCollection = collection(db,"agency")
+    //   // console.log(user)
 
-          // create tags collection if current agency does not have one
-          if (!docSnap.exists()) {
-         
-              // reference to tags collection 
-              const tagsCollection = collection(db, "tags")
+    //   // If current user is an agency, determine which agency
 
-              const myDocRef = doc(tagsCollection, agencyId)
+    //   const q = query(agencyCollection, where("name", "==", selectedAgency), where("state","==", userData.state.name))
+    //   let agencyId;
+    //   getDocs(q).then((querySnapshot) => {
+    //     querySnapshot.forEach((docAgency) => { // Set initial values
+    //       // console.log("im here")
+    //       agencyId = 'i2ef53bVPh9xciy0huIR'
+    //       // console.log(agencyId)
+    //       setSelectedAgencyID('i2ef53bVPh9xciy0huIR')
+    //       // console.log(agencyId)
+    //       const docRef = doc(db, 'tags', setSelectedAgencyID)
+    //       getDoc(docRef).then((docSnap)=> {
+    //     // TODO: test to make sure not null
 
-              // create topics document for the new agency
-              setDoc(myDocRef, {
-          
-								Labels: {
-									list: defaultLabels,
-                  active: defaultLabels
-								},
+    //       // create tags collection if current agency does not have one
+    //       if (!docSnap.exists()) {
 
-								Source: {
-									list: defaultSources,
-                  active: defaultSources
-								},
-								Topic: {
-									list: defaultTopics,
-                  active: defaultTopics
-                }
-							})
-						} else {
-            // console.log("Tags collection for this agency exists.")
-          }
-        });
-				})
-			})
-		}
-	}, [selectedAgency])
+    //           // reference to tags collection
+    //           const tagsCollection = collection(db, "tags")
+
+    //           const myDocRef = doc(tagsCollection, agencyId)
+
+    //           // create topics document for the new agency
+    //           setDoc(myDocRef, {
+
+		// 						Labels: {
+		// 							list: defaultLabels,
+    //               active: defaultLabels
+		// 						},
+
+		// 						Source: {
+		// 							list: defaultSources,
+    //               active: defaultSources
+		// 						},
+		// 						Topic: {
+		// 							list: defaultTopics,
+    //               active: defaultTopics
+    //             }
+		// 					})
+		// 				} else {
+    //         // console.log("Tags collection for this agency exists.")
+    //       }
+    //     });
+		// 		})
+		// 	})
+		// }
+		let agencyId;
+		agencyId = 'i2ef53bVPh9xciy0huIR'
+		// console.log(agencyID);
+	}, [])
 
   useEffect(()=> {
     if (userData) {
@@ -274,12 +277,12 @@ const ReportSystem = ({
     }
   }, [agencyID])
 
-  // useEffect(()=> {
-  //   if (allTopicsArr.length > 0) {
-  //     getAllSources()
-      
-  //   }
-  // }, [allTopicsArr])
+  useEffect(()=> {
+    if (allTopicsArr.length > 0) {
+      getAllSources()
+
+    }
+  }, [allTopicsArr])
 
 	// Get topics
 	async function getAllTopics() {
@@ -291,11 +294,11 @@ const ReportSystem = ({
        // create tags collection if current agency does not have one
        if (!docRef.exists()) {
           // console.log("Need to create tag collection for agency. ")
-          const defaultTopics = ["Soda","Other","EnergyDrink","Coffee"] // tag system 1
+          const defaultTopics = ["Soda","Other","Energy Drink","Coffee"] // tag system 1
           const defaultSources = ["Newspaper", "Other","Social","Website"] // tag system 2
           const defaultLabels = ["Important", "Flagged"] // tag system 3
 
-          // reference to tags collection 
+          // reference to tags collection
           const myDocRef = doc(db, "tags", agencyID);
           setAllTopicsArr(defaultTopics)
           setActive(defaultTopics['active'])
@@ -317,9 +320,9 @@ const ReportSystem = ({
         })
         // retrieve list of topics again after creating document of tags for agency
         // console.log("in if statement")
-       
-    
-  
+
+
+
 
       // Otherwise, tag collection already exists.
       } else {
@@ -335,12 +338,12 @@ const ReportSystem = ({
         // console.log(tagsData['active'])
         setActive(tagsData['active']);
       }
-  
+
     } catch (error) {
       console.log(error);
     } finally {
       // console.log('Cleanup here'); // cleanup, always executed
-  }		
+  }
   // const topicDoc = doc(db, "tags", "FKSpyOwuX6JoYF1fyv6b")
 		// const topicRef = await getDoc(topicDoc)
 		// let topics = topicRef.get("Topic")["active"]
@@ -363,7 +366,7 @@ const ReportSystem = ({
       setSources(sources);
 			}
     }
-	
+
 	// Handlers
 	const handleSubmitClick = (e) => {
 		e.preventDefault()
@@ -488,11 +491,15 @@ const ReportSystem = ({
 		if (tag) {
 			tempTopicArr.push(tag)
 			setTopicList(tempTopicArr)
+		} else {
+			console.error('Tag is not set!');
 		}
 
 		if (source) {
 			tempSourceArr.push(source)
 			setSourceList(tempSourceArr)
+		} else {
+			console.error('Source note set!!');
 		}
 
 		updateTopicTags(
@@ -531,7 +538,7 @@ const ReportSystem = ({
 				// Check if source is provided and update it
 				if (source) {
 					const currentSourceList = currentData.Source?.list || []
-					console.log('currentSourceList--> ', currentSourceList);
+					// console.log('currentSourceList--> ', currentSourceList);
 					const newSourceList = source.filter(
 						(item) => !currentSourceList.includes(item),
 					)
@@ -557,7 +564,7 @@ const ReportSystem = ({
 			console.error('Error updating document: ', error)
 		}
 	}
-	
+
 	const logFormData = () => {
 		const formData = {
 			Agency: selectedAgency,
@@ -574,15 +581,16 @@ const ReportSystem = ({
 			"Report images": imageURLs,
 			"Report description": detail,
 			"Report ID": reportId,
-			"Report KEY": key
+			"Report KEY": key,
+			"ALL Topics": allTopicsArr
 		};
-		
+
 		// console.log("Form Data: ", formData);
 	};
 	useEffect(() => {
 		logFormData()
 	}, [reportSystem, update])
-	
+
 	const handleChange = (e) => {
 		// console.log('handleChange--> ', e.target.value)
 		if (titleError) {
@@ -598,13 +606,13 @@ const ReportSystem = ({
         formRef.current.reset();  // Resets all input fields to their initial values
     }
 		// if (formRef.current) {
-		setSelectedAgency("")
-		setSelectedAgencyID('')
+		setSelectedAgency("Test Agency")
+		setSelectedAgencyID('i2ef53bVPh9xciy0huIR')
 		// Topics
 		setSelectedTopic("")
 		setShowOtherTopic(false)
 		setOtherTopic('')
-		setAllTopicsArr([])
+		setAllTopicsArr(allTopicsArr)
 		// Sources
 		setSelectedSource("")
 		setShowOtherSource(false)
@@ -699,7 +707,7 @@ const ReportSystem = ({
 					</div>
 				)}
 			</>
-			{reportSystem >= 2 && reportSystem <= 6 && (
+			{reportSystem >= 2 && reportSystem <= 5 && (
 				<div className={globalStyles.form.wrap}>
 					<form
 						onChange={handleChange}
@@ -707,38 +715,8 @@ const ReportSystem = ({
 						className={globalStyles.form.element}
 						ref={formRef}
 						id={key}>
-						{/* Agency */}
-						{reportSystem == 2 && (
-							<div className={globalStyles.form.viewWrapper}>
-								<Typography variant='h5'>{t("which_agency")}</Typography>
-								<Card>
-									<List>
-										{agencies.length == 0 && t("noAgencies")}
-										{agencies.map((agency, i = self.crypto.randomUUID()) => (
-											<ListItem
-												id='agency'
-												key={i}
-												selected={agency === selectedAgency}
-												value={agency}
-												onClick={() => setSelectedAgency(agency)}>
-												{agency}
-											</ListItem>
-										))}
-									</List>
-								</Card>
-								{errors.agency && selectedAgency === "" && (
-									<span className='text-red-500'>{errors.agency}</span>
-								)}
-								{/* FORWARD ARROW */}
-								{selectedAgency != "" && (
-									<div className='absolute bottom-4 right-4 sm:right-6'>
-										<ForwardArrow />
-									</div>
-								)}
-							</div>
-						)}
 						{/* Topic tag */}
-						{reportSystem == 3 && (
+						{reportSystem == 2 && (
 							<div className={globalStyles.form.viewWrapper}>
 								<Typography variant='h5'>{t("about")}</Typography>
 								<Card>
@@ -786,7 +764,7 @@ const ReportSystem = ({
 							</div>
 						)}
 						{/* Source tag */}
-						{reportSystem == 4 && (
+						{reportSystem == 3 && (
 							<div className={globalStyles.form.viewWrapper}>
 								<Typography variant='h5'>{t("where")}</Typography>
 								<Card>
@@ -833,7 +811,7 @@ const ReportSystem = ({
 							</div>
 						)}
 						{/* Details */}
-						{reportSystem == 5 && (
+						{reportSystem == 4 && (
 							<div className='flex flex-col gap-6 mb-1'>
 								<div className='block'>
 									<Typography variant='h5'>{t("share")}</Typography>
@@ -970,7 +948,7 @@ const ReportSystem = ({
 							</div>
 						)}
 						{/* BACK ICON */}
-						{reportSystem > 0 && reportSystem < 7 && (
+						{reportSystem > 0 && reportSystem < 6 && (
 							<div className='absolute opacity-50 hover:opacity-100 bottom-4 left-4 sm:left-6'>
 								<BackArrow />
 							</div>
@@ -978,7 +956,7 @@ const ReportSystem = ({
 					</form>
 				</div>
 			)}
-			{reportSystem === 7 && (
+			{reportSystem === 6 && (
 				<div className={`${globalStyles.form.wrap} sm:p-6`}>
 					<>
 						{/* THANK YOU */}
