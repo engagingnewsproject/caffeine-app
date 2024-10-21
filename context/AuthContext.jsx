@@ -114,12 +114,14 @@ export const AuthContextProvider = ({children}) => {
   const verifyEmail = (user) => {
     return new Promise((resolve, reject) => {
       const isDevelopment = window.location.hostname === 'localhost';
-      var actionCodeSettings = {
-        url: isDevelopment
-          ? 'http://localhost:3001/login' // Use localhost during development
-          : 'https://caffeine-dashboard.netlify.app/login', // Use production URL
+      const actionCodeSettings = {
+        url: hostname === 'localhost'
+          ? 'http://localhost:3001/login' // Local development URL
+          : hostname.includes('dev')
+            ? 'https://dev--your-netlify-app.netlify.app/login' // Netlify dev branch URL
+            : 'https://caffeine-dashboard.netlify.app/login', // Production URL
         handleCodeInApp: true,
-      };
+      }
 
       sendEmailVerification(user, actionCodeSettings)
         .then(() => {
