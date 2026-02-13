@@ -112,41 +112,47 @@ const ReportsSection = ({
 		let agencyName = ''
 		let agencyId = ''
 		let agencyTags = []
-		if (isAgency) {
-			const agencyQuery = query(
-				collection(db, 'agency'),
-				where('agencyUsers', 'array-contains', user.email),
-			)
-			const agencySnapshot = await getDocs(agencyQuery)
-			agencySnapshot.forEach((doc) => {
-				agencyName = doc.data().name
-				agencyId = doc.id
-			})
-			const reportsQuery = query(
-				collection(db, 'reports'),
-				where('agency', '==', agencyName),
-			)
-			const reportSnapshot = await getDocs(reportsQuery)
-			reportSnapshot.forEach((doc) => {
-				const data = doc.data()
-				data.reportID = doc.id
-				reportArr.push(data)
-			})
-			// TAGS
-			// Query to get tags related to the agency
-			const tagsDocRef = doc(db, 'tags', agencyId)
-			const tagsDoc = await getDoc(tagsDocRef)
-			if (tagsDoc.exists()) {
-				agencyTags = tagsDoc.data()
+		try {
+			if (isAgency) {
+				const agencyQuery = query(
+					collection(db, 'agency'),
+					where('agencyUsers', 'array-contains', user.email),
+				)
+				const agencySnapshot = await getDocs(agencyQuery)
+				agencySnapshot.forEach((doc) => {
+					agencyName = doc.data().name
+					agencyId = doc.id
+				})
+				const reportsQuery = query(
+					collection(db, 'reports'),
+					where('agency', '==', agencyName),
+				)
+				const reportSnapshot = await getDocs(reportsQuery)
+				reportSnapshot.forEach((doc) => {
+					const data = doc.data()
+					data.reportID = doc.id
+					reportArr.push(data)
+				})
+				// TAGS
+				// Query to get tags related to the agency
+				const tagsDocRef = doc(db, 'tags', agencyId)
+				const tagsDoc = await getDoc(tagsDocRef)
+				if (tagsDoc.exists()) {
+					agencyTags = tagsDoc.data()
+					if (agencyTags?.Labels?.active) {
+						setActiveLabels(agencyTags.Labels.active)
+					}
+				}
+			} else {
+				const reportSnapshot = await getDocs(collection(db, 'reports'))
+				reportSnapshot.forEach((doc) => {
+					const data = doc.data()
+					data.reportID = doc.id
+					reportArr.push(data)
+				})
 			}
-			setActiveLabels(agencyTags.Labels.active)
-		} else {
-			const reportSnapshot = await getDocs(collection(db, 'reports'))
-			reportSnapshot.forEach((doc) => {
-				const data = doc.data()
-				data.reportID = doc.id
-				reportArr.push(data)
-			})
+		} catch (err) {
+			console.warn('Could not load reports (e.g. Firestore permissions).', err?.message)
 		}
 		setReports(reportArr)
 		setReportsReadState(

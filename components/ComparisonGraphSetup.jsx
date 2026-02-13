@@ -96,23 +96,29 @@ const ComparisonGraphSetup = ({privilege, agencyId}) => {
   async function getTopicChoices() {
     const topicChoices = []
     let tempTopics = []
-    let topics
-    if (privilege === 'Agency') {
-      const topicDoc = doc(db,"tags",agencyId)
-      const topicRef = await getDoc(topicDoc)
-      topics = topicRef.get("Topic")['active']
-      
-    } else {
-      const tags = await firebaseHelper.fetchAllRecordsOfCollection('tags')
-      const allActiveTopics = tags.map((tag) => tag.Topic.active)
-      const combinedTopics = allActiveTopics.flat()
-      tempTopics = [...new Set(combinedTopics)]
-      topics = tempTopics
+    let topics = []
+    try {
+      if (privilege === 'Agency') {
+        const topicDoc = doc(db, "tags", agencyId)
+        const topicRef = await getDoc(topicDoc)
+        if (topicRef.exists() && topicRef.data()?.Topic?.active) {
+          topics = topicRef.data().Topic.active
+        }
+      } else {
+        const tags = await firebaseHelper.fetchAllRecordsOfCollection('tags')
+        const allActiveTopics = tags.map((tag) => tag.Topic?.active).filter(Boolean)
+        const combinedTopics = allActiveTopics.flat()
+        tempTopics = [...new Set(combinedTopics)]
+        topics = tempTopics
+      }
+      topics.forEach(function (element) {
+        topicChoices.push({ label: element, value: element })
+      })
+      setTopicChoices(topicChoices)
+    } catch (err) {
+      console.warn('Could not load topic choices (e.g. Firestore permissions).', err?.message)
+      setTopicChoices([])
     }
-    topics.forEach(function(element) {
-      topicChoices.push({ label: element, value: element})
-    });
-    setTopicChoices(topicChoices)
   }
 
   const animatedComponents = makeAnimated();

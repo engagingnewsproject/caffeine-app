@@ -38,6 +38,9 @@ const column = {
 	data_center:
 		'whitespace-normal md:whitespace-nowrap text-sm px-3 py-1 text-center',
 }
+/** Number of user rows to show per batch when scrolling (lazy load). */
+const ROWS_PER_PAGE = 25
+
 const style = {
 	icon: 'hover:fill-cyan-700',
 	section_container:
@@ -108,7 +111,7 @@ const Users = () => {
 	const [userRole, setUserRole] = useState('')
 	const [loadedMobileUsers, setLoadedMobileUsers] = useState([])
 	const [isLoading, setIsLoading] = useState(false)
-	const [endIndex, setEndIndex] = useState(0)
+	const [endIndex, setEndIndex] = useState(ROWS_PER_PAGE)
 	const [deleteModal, setDeleteModal] = useState(false)
 	const [userEditing, setUserEditing] = useState([])
 	const [name, setName] = useState('')
@@ -143,13 +146,17 @@ const Users = () => {
 	 * and stored in the `agenciesArray` state.
 	 */
 	const fetchAgencies = async () => {
-		const snapshot = await getDocs(collection(db, 'agency'))
-		const agencies = snapshot.docs.map((doc) => ({
-			id: doc.id,
-			name: doc.data().name,
-		}))
-		// console.log(agencies);
-		setAgenciesArray(agencies)
+		try {
+			const snapshot = await getDocs(collection(db, 'agency'))
+			const agencies = snapshot.docs.map((doc) => ({
+				id: doc.id,
+				name: doc.data().name,
+			}))
+			setAgenciesArray(agencies)
+		} catch (err) {
+			console.warn('Could not load agencies (e.g. Firestore permissions).', err?.message)
+			setAgenciesArray([])
+		}
 	}
 
 	/**
@@ -163,14 +170,17 @@ const Users = () => {
 	 * @returns {Promise<string[]>} A promise that resolves to an array of user IDs associated with the specified agency.
 	 */
 	const getAgencyUserIds = async (agencyName) => {
-		const reportQuery = query(
-			collection(db, 'reports'),
-			where('agency', '==', agencyName),
-		)
-		const reportSnapshot = await getDocs(reportQuery)
-		const userIds = reportSnapshot.docs.map((doc) => doc.data().userID)
-		// console.log("User IDs from reports:", userIds); // Verify the IDs being captured
-		return userIds
+		try {
+			const reportQuery = query(
+				collection(db, 'reports'),
+				where('agency', '==', agencyName),
+			)
+			const reportSnapshot = await getDocs(reportQuery)
+			return reportSnapshot.docs.map((doc) => doc.data().userID)
+		} catch (err) {
+			console.warn('Could not load agency user IDs.', err?.message)
+			return []
+		}
 	}
 
 	/**
@@ -186,23 +196,21 @@ const Users = () => {
 	 * @returns {Promise<Array>} A promise that resolves to an array of filtered user objects associated with the user's agency.
 	 */
 	const filterUsersByAgency = async (users, userEmail) => {
-		const q = query(
-			collection(db, 'agency'),
-			where('agencyUsers', 'array-contains', userEmail),
-		)
-		const querySnapshot = await getDocs(q)
-		if (querySnapshot.docs.length > 0) {
-			const agencyName = querySnapshot.docs[0].data().name // Assuming the first result is the correct one
-
-			const userIds = await getAgencyUserIds(agencyName) // Retrieve user IDs for this agency
-			const filteredUsers = users.filter((user) =>
-				userIds.includes(user.mobileUserId),
+		try {
+			const q = query(
+				collection(db, 'agency'),
+				where('agencyUsers', 'array-contains', userEmail),
 			)
-			// console.log("Filtered users:", filteredUsers); // Log the filtered users for debugging
-			return filteredUsers
-		} else {
-			console.log('No agency found for this user.')
-			return [] // Return an empty array if no agency is found
+			const querySnapshot = await getDocs(q)
+			if (querySnapshot.docs.length > 0) {
+				const agencyName = querySnapshot.docs[0].data().name
+				const userIds = await getAgencyUserIds(agencyName)
+				return users.filter((user) => userIds.includes(user.mobileUserId))
+			}
+			return []
+		} catch (err) {
+			console.warn('Could not filter users by agency.', err?.message)
+			return []
 		}
 	}
 
@@ -313,7 +321,8 @@ const Users = () => {
 				setLoadedMobileUsers(sortByJoinedDate(combinedUsers)) // array combination of mobileUsers doc and auth user info
 			}
 		} catch (error) {
-			console.error('Failed to fetch or process user data:', error)
+			console.warn('Could not load users (e.g. Firestore permissions).', error?.message)
+			setLoadedMobileUsers([])
 		} finally {
 			setIsLoading(false)
 		}
@@ -430,36 +439,31 @@ const Users = () => {
 	 */
 	useEffect(() => {
 		const fetchInitialData = async () => {
-			if (customClaims.admin) {
-				// Admin: Fetch all agencies and user data
-				await fetchAgencies()
-				await getData()
-			} else if (customClaims.agency) {
-				// Agency user: Fetch only the agency details and user data
-				const agencySnapshot = await getDocs(
-					query(
-						collection(db, 'agency'),
-						where('agencyUsers', 'array-contains', user.email.toLowerCase()),
-					),
-				)
-
-				if (!agencySnapshot.empty) {
-					const agencyDoc = agencySnapshot.docs[0]
-					const agencyId = agencyDoc.id
-					const agencyName = agencyDoc.data().name
-					console.log(agencyDoc)
-					console.log(agencyId)
-					console.log(agencyName)
-					// Store the agency ID and name in state or context
-					setAgencyId(agencyId)
-					setAgencyName(agencyName)
-
+			try {
+				if (customClaims.admin) {
+					await fetchAgencies()
 					await getData()
-					// Fetch data relevant to this agency
-					// await getData(agencyId) // Pass the agencyId to fetch data for this agency
-				} else {
-					console.error('No agency found for the current user.')
+				} else if (customClaims.agency) {
+					const agencySnapshot = await getDocs(
+						query(
+							collection(db, 'agency'),
+							where('agencyUsers', 'array-contains', user.email.toLowerCase()),
+						),
+					)
+
+					if (!agencySnapshot.empty) {
+						const agencyDoc = agencySnapshot.docs[0]
+						const agencyId = agencyDoc.id
+						const agencyName = agencyDoc.data().name
+						setAgencyId(agencyId)
+						setAgencyName(agencyName)
+						await getData()
+					} else {
+						console.warn('No agency found for the current user.')
+					}
 				}
+			} catch (err) {
+				console.warn('Could not load initial user/agency data.', err?.message)
 			}
 		}
 
@@ -504,44 +508,42 @@ const Users = () => {
 	 */
 	const handleEditUser = async (userObj, userId) => {
 		setUserId(userId)
-		const userRef = await getDoc(doc(db, 'mobileUsers', userId))
 		setUserEditing(userObj)
 		setUserEditModal(true)
-
-		// Retrieve the email from the `mobileUsers` document and convert it to lowercase
-		const email = userRef.data().email.toLowerCase()
-
-		// Query all agencies and find the one where the email matches case-insensitively
-		const agenciesSnapshot = await getDocs(collection(db, 'agency'))
-		let userAgencyDoc = null
-
-		agenciesSnapshot.forEach((doc) => {
-			const agencyUsers = doc.data().agencyUsers || []
-			// Convert each email in agencyUsers to lowercase and check for a match
-			if (agencyUsers.some((userEmail) => userEmail.toLowerCase() === email)) {
-				userAgencyDoc = doc
+		try {
+			const userRef = await getDoc(doc(db, 'mobileUsers', userId))
+			if (!userRef.exists()) {
+				setUserEditModal(false)
+				return
 			}
-		})
+			const userData = userRef.data()
+			const email = (userData.email || '').toLowerCase()
 
-		if (userAgencyDoc) {
-			const userAgency = userAgencyDoc.id // Get the document ID
-			const agencyName = userAgencyDoc.data().name // Get the agency name from the document data
+			const agenciesSnapshot = await getDocs(collection(db, 'agency'))
+			let userAgencyDoc = null
+			agenciesSnapshot.forEach((doc) => {
+				const agencyUsers = doc.data().agencyUsers || []
+				if (agencyUsers.some((userEmail) => (userEmail || '').toLowerCase() === email)) {
+					userAgencyDoc = doc
+				}
+			})
 
-			console.log('userAgency ID --> ', userAgency)
-			console.log('agencyName --> ', agencyName)
+			if (userAgencyDoc) {
+				setSelectedAgency(userAgencyDoc.id)
+				setAgencyName(userAgencyDoc.data().name)
+			} else {
+				setSelectedAgency('')
+				setAgencyName('')
+			}
 
-			setSelectedAgency(userAgency)
-			setAgencyName(agencyName)
-		} else {
-			setSelectedAgency('')
-			setAgencyName('')
+			setName(userData['name'] ?? '')
+			setEmail(userData['email'])
+			setBanned(userData['isBanned'] ?? false)
+			setUserRole(userData['userRole'] ?? 'User')
+		} catch (err) {
+			console.warn('Could not load user for edit (e.g. Firestore permissions).', err?.message)
+			setUserEditModal(false)
 		}
-
-		// setSelectedAgency(userAgency || '')
-		setName(userRef.data()['name'] ?? '')
-		setEmail(userRef.data()['email'])
-		setBanned(userRef.data()['isBanned'] ?? false)
-		setUserRole(userRef.data()['userRole'] ?? 'User')
 	}
 
 	/**
@@ -808,6 +810,18 @@ const Users = () => {
 		getData()
 	}, [update])
 
+	// Reset visible row count to first page when user list is (re)loaded (lazy load).
+	useEffect(() => {
+		setEndIndex(Math.min(ROWS_PER_PAGE, loadedMobileUsers.length))
+	}, [loadedMobileUsers])
+
+	const loadMoreUsers = () => {
+		setEndIndex((prev) => Math.min(prev + ROWS_PER_PAGE, loadedMobileUsers.length))
+	}
+
+	const visibleUsers = loadedMobileUsers.slice(0, endIndex)
+	const hasMoreUsers = endIndex < loadedMobileUsers.length
+
 	return (
 		<div className={style.section_container}>
 			<div className={style.section_wrapper}>
@@ -844,12 +858,26 @@ const Users = () => {
 				)}
 				<div className={style.table_main}>
 					<div className="flex flex-col h-full">
-						<InfiniteScroll
-							className="overflow-x-auto"
-							dataLength={endIndex}
-							inverse={false}
-							scrollableTarget="scrollableDiv">
-							<table className="min-w-full bg-white rounded-xl p-1">
+						<div
+							id="scrollableDiv"
+							className="overflow-x-auto overflow-y-auto"
+							style={{ maxHeight: '60vh' }}
+						>
+							<InfiniteScroll
+								className="overflow-x-auto"
+								dataLength={visibleUsers.length}
+								next={loadMoreUsers}
+								hasMore={hasMoreUsers}
+								loader={
+									hasMoreUsers ? (
+										<div className="text-center py-3 text-sm text-gray-500">
+											Loading more...
+										</div>
+									) : null
+								}
+								scrollableTarget="scrollableDiv"
+							>
+								<table className="min-w-full bg-white rounded-xl p-1">
 								<thead className="border-b dark:border-indigo-100 bg-slate-100">
 									<tr>
 										<th scope="col" className={tableHeading.default}>
@@ -902,7 +930,7 @@ const Users = () => {
 											</td>
 										</tr>
 									) : (
-										loadedMobileUsers.map((userObj, key) => {
+										visibleUsers.map((userObj, key) => {
 											// Directly access user details and user ID
 											let userId = userObj.mobileUserId
 
@@ -975,8 +1003,9 @@ const Users = () => {
 								</tbody>
 							</table>
 						</InfiniteScroll>
+						</div>
 						<div className="mt-2 self-end text-xs">
-							Total users: {loadedMobileUsers.length}
+							Showing {visibleUsers.length} of {loadedMobileUsers.length} users
 						</div>
 					</div>
 				</div>

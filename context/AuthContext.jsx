@@ -37,8 +37,15 @@ export const AuthContextProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
           // let customClaims = { admin: false, agency: false}
             if (user) {
-                const ref = await getDoc(doc(db, "locations", "Texas"))
-                const localId = ref.data()['Austin']
+                let localId = user.uid
+                try {
+                  const ref = await getDoc(doc(db, "locations", "Texas"))
+                  if (ref.exists() && ref.data()?.['Austin']) {
+                    localId = ref.data()['Austin']
+                  }
+                } catch (err) {
+                  console.warn('Could not read locations/Texas (e.g. rules or App Check). Using accountId.', err?.message)
+                }
                 setUser({
                     uid: localId, // not sure what this is used for
                     accountId: user.uid,

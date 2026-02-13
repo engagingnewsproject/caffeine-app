@@ -13,13 +13,17 @@ const Headbar = ({ search, setSearch}) => {
     const [title,setTitle] = useState('')
 
     const getData = async () => {
-        const agencyCollection = collection(db, 'agency')
-		const q = query(agencyCollection, where('agencyUsers', "array-contains", user['email']));
-        const querySnapshot = await getDocs(q)
-        querySnapshot.forEach((doc) => {
+        try {
+          const agencyCollection = collection(db, 'agency')
+          const q = query(agencyCollection, where('agencyUsers', "array-contains", user['email']));
+          const querySnapshot = await getDocs(q)
+          querySnapshot.forEach((doc) => {
             setTitle(doc.data()['name'])
             setAgencyLogo(doc.data()['logo'][0])
-        });
+          });
+        } catch (err) {
+          console.warn('Could not load agency (e.g. Firestore permissions).', err?.message)
+        }
 	}
     
     const handleSearch = (e) => {

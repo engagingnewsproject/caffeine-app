@@ -50,71 +50,63 @@ const TagGraph = () => {
 
   const setRole = () => {
     verifyRole().then((result) => {
-      
-      // console.log("Current user information " + result.admin)
       if (result.agency) {
-        let agencyTempName;
-        let agencyTempId;
-        const agencyCollection = collection(db,"agency")
-        const q = query(agencyCollection, where('agencyUsers', "array-contains", user['email']));
-        getDocs(q).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => { // Set initial values
-          // console.log(doc.data())
-          agencyTempName = doc.data()['name']
-          agencyTempId = doc.id
-          setAgencyName(agencyTempName)
-          setAgencyId(agencyTempId)
-          setPrivilege("Agency")
-        
+        const agencyCollection = collection(db, "agency")
+        const q = query(agencyCollection, where('agencyUsers', "array-contains", user['email']))
+        getDocs(q)
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              setAgencyName(doc.data()['name'])
+              setAgencyId(doc.id)
+              setPrivilege("Agency")
+            })
           })
-        })
+          .catch((err) => {
+            console.warn('Could not load agency for role (e.g. Firestore permissions).', err?.message)
+            setPrivilege(null)
+          })
       } else if (result.admin) {
-        // console.log("setting name")
         setAgencyName("AdminName")
         setAgencyId('AdminId')
         setPrivilege("AdminPrivilege")
       }
-
-
     })
-  
   }
 
   async function getTopicReports() {
-    setLoading(true);  // Start loading
-    const reportsList = collection(db, "reports");
-    // console.log("in topic reports")
-
-    // console.log(privilege)
+    setLoading(true)
+    const reportsList = collection(db, "reports")
     let tempTopics = []
-    if (privilege === 'Agency') {
-			// Retrieve array of all topics
-			const topicDoc = doc(db, 'tags', agencyId)
-			const topicRef = await getDoc(topicDoc)
-      tempTopics = topicRef.get('Topic')['active']
-      // console.log(tempTopics);
-			setTopics(tempTopics)
-		} else {
-      try {
-        // Retrieve all tags documents
-				const tags = await FirebaseHelper.fetchAllRecordsOfCollection('tags')
-				// Extract the active topics from each document's Topic field
-				const allActiveTopics = tags.map((tag) => tag.Topic.active)
-				// Combine all arrays into a single array
-				const combinedTopics = allActiveTopics.flat()
-				// Remove duplicates
-        tempTopics = [...new Set(combinedTopics)]
-        // console.log(tempTopics);
-        setTopics(tempTopics)
-			} catch (error) {
-				console.error('Error fetching tags: ', error)
-			}
-    }
 
-    if (tempTopics.length === 0) {
-      setLoading(false);
-      return;
-    }
+    try {
+      if (privilege === 'Agency') {
+        const topicDoc = doc(db, 'tags', agencyId)
+        const topicRef = await getDoc(topicDoc)
+        if (topicRef.exists() && topicRef.data()?.Topic?.active) {
+          tempTopics = topicRef.data().Topic.active
+          setTopics(tempTopics)
+        }
+      } else {
+        try {
+          const tags = await FirebaseHelper.fetchAllRecordsOfCollection('tags')
+          const allActiveTopics = (tags || []).map((tag) => tag.Topic?.active).filter(Boolean)
+          const combinedTopics = allActiveTopics.flat()
+          tempTopics = [...new Set(combinedTopics)]
+          setTopics(tempTopics)
+        } catch (err) {
+          console.warn('Could not load tags (e.g. Firestore permissions).', err?.message)
+        }
+      }
+
+      if (tempTopics.length === 0) {
+        setYesterdayReports([["Topics", "Number Reports"]])
+        setThreeDayReports([["Topics", "Number Reports"]])
+        setSevenDayReports([["Topics", "Number Reports"]])
+        setNumTrendingTopics([0, 0, 0])
+        setLoaded(true)
+        setLoading(false)
+        return
+      }
     
     // Maintain count of reports for each topic in the previous day, past three days and past seven days
     const topicsYesterday = []
@@ -202,14 +194,23 @@ const TagGraph = () => {
     for (let index = 0; index < sortedSevenDays.length; index++) {
       // console.log (sortedSevenDays[index])
     }
-    const trendingTopics = [["Topics", "Number Reports"]];
-    setYesterdayReports(trendingTopics.concat(sortedYesterday))
-    setThreeDayReports(trendingTopics.concat(sortedThreeDays))
-    setSevenDayReports(trendingTopics.concat(sortedSevenDays))
-    setLoaded(true)
-    setLoading(false);  // Stop loading
-  };
-  
+      const trendingTopics = [["Topics", "Number Reports"]]
+      setYesterdayReports(trendingTopics.concat(sortedYesterday))
+      setThreeDayReports(trendingTopics.concat(sortedThreeDays))
+      setSevenDayReports(trendingTopics.concat(sortedSevenDays))
+      setLoaded(true)
+    } catch (err) {
+      console.warn('Could not load topic reports (e.g. Firestore permissions).', err?.message)
+      setYesterdayReports([["Topics", "Number Reports"]])
+      setThreeDayReports([["Topics", "Number Reports"]])
+      setSevenDayReports([["Topics", "Number Reports"]])
+      setNumTrendingTopics([0, 0, 0])
+      setLoaded(true)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   // On page load (mount), verify if the current user is an agency
   useEffect(() => {
     // console.log("I am here")

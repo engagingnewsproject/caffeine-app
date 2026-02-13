@@ -53,19 +53,19 @@ const Agencies = ({handleAgencyUpdateSubmit}) => {
 	// Data
 	// The getData function retrieves agency data from a Firebase Firestore collection and populates the agencies state variable.
 	const getData = async () => {
-		const agencyCollection = collection(db, 'agency')
-		const reportsCollection = collection(db, 'reports')
-		const snapshot = await getDocs(agencyCollection, reportsCollection)
 		try {
-			var arr = []
+			const agencyCollection = collection(db, 'agency')
+			const snapshot = await getDocs(agencyCollection)
+			const arr = []
 			snapshot.forEach((doc) => {
 				arr.push({
 					[doc.id]: doc.data(),
 				})
 			})
 			setAgencies(arr)
-		} catch (error) {
-			console.log(error)
+		} catch (err) {
+			console.warn('Could not load agencies (e.g. Firestore permissions).', err?.message)
+			setAgencies([])
 		}
 	}
 	
@@ -216,12 +216,20 @@ const Agencies = ({handleAgencyUpdateSubmit}) => {
 	// Handler: Agency modal
 	// Modal for existing agencies. Modals displayed when user click's the list item to view agency details, or delete an agency.
 	const handleAgencyModalShow = async (agencyId) => {
-		setAgencyModal(true)
-		const docRef = await getDoc(doc(db, 'agency', agencyId))
-		setAgencyInfo(docRef.data())
-		setAgencyUsersArr(docRef.data()['agencyUsers'])
-		setAgencyId(agencyId)
-		setLogo(docRef.data()['logo'])
+		try {
+			setAgencyModal(true)
+			const docRef = await getDoc(doc(db, 'agency', agencyId))
+			if (docRef.exists()) {
+				const data = docRef.data()
+				setAgencyInfo(data)
+				setAgencyUsersArr(data['agencyUsers'] || [])
+				setAgencyId(agencyId)
+				setLogo(data['logo'])
+			}
+		} catch (err) {
+			console.warn('Could not load agency (e.g. Firestore permissions).', err?.message)
+			setAgencyModal(false)
+		}
 	}
 	// Handler: Agency update
 	const handleAgencyUpdate = async (e) => {

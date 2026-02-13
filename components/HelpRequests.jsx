@@ -40,20 +40,26 @@ const HelpRequests = () => {
 	const [loading, setLoading] = useState(true)
 
 	const getData = async () => {
-		const helpRequestsCollection = collection(db, 'helpRequests')
-		const helpRequestsSnapshot = await getDocs(helpRequestsCollection)
+		try {
+			const helpRequestsCollection = collection(db, 'helpRequests')
+			const helpRequestsSnapshot = await getDocs(helpRequestsCollection)
 
-		const helpRequestsList = helpRequestsSnapshot.docs.map((doc) => {
-			const { createdDate, ...data } = doc.data()
-			return {
-				id: doc.id,
-				...data,
-				createdDate: formatDate(createdDate),
-			}
-		})
+			const helpRequestsList = helpRequestsSnapshot.docs.map((doc) => {
+				const { createdDate, ...data } = doc.data()
+				return {
+					id: doc.id,
+					...data,
+					createdDate: formatDate(createdDate),
+				}
+			})
 
-		setHelpRequests(helpRequestsList)
-		setLoading(false)
+			setHelpRequests(helpRequestsList)
+		} catch (err) {
+			console.warn('Could not load help requests (e.g. Firestore permissions).', err?.message)
+			setHelpRequests([])
+		} finally {
+			setLoading(false)
+		}
 	}
 
 	const formatDate = (timestamp) => {

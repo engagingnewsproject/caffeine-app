@@ -41,8 +41,8 @@ class FirebaseServices {
 			})
 			return records
 		} catch (error) {
-			console.error('Error fetching records: ', error)
-			throw error
+			console.warn(`Could not fetch ${collectionName} (e.g. Firestore permissions).`, error?.message)
+			return []
 		}
 	}
 
