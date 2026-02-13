@@ -37,7 +37,7 @@ const Modal = ({ showModal, closeModal, children }) => {
 						third-party (e.g., a news website) using the tools, provide
 						information such as names, usernames, email addresses, and
 						passwords. They also can create or answer quiz questions and provide
-						reports or assessments of potential misinformation.
+						caffeine-related reports.
 					</Typography>
 					<Typography variant="paragraph" className='mb-3'>
 						Your name, username, and email address are used to log your

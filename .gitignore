@@ -67,3 +67,4 @@ functions/sendgrid.env
 # Workspace
 caffeine-app.code-workspace
 .runtimeconfig.json
+caffeine-app-service-account-key.json
