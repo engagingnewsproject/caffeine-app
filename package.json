@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "./start-dev.sh",
+    "dev:prod": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "set-admin-claim": "node scripts/set-admin-claim.js",
+    "remove-claim": "node scripts/remove-claim.js",
+    "set-agency-claim": "node scripts/set-agency-claim.js"
   },
   "dependencies": {
     "@firebase/app": "0.x",

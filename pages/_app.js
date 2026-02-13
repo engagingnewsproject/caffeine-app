@@ -1,6 +1,7 @@
 import { useRouter } from "next/router"
 import ProtectedRoute from "../components/ProtectedRoute"
 import { AuthContextProvider } from "../context/AuthContext"
+import DevFirebaseFooter from "../components/DevFirebaseFooter"
 import "../styles/globals.css"
 import "react-tooltip/dist/react-tooltip.css"
 import { appWithTranslation } from "next-i18next"
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }) {
 								</ProtectedRoute>
 							)}
 						</div>
+						<DevFirebaseFooter />
 					</div>
 				</AuthContextProvider>
 			</ThemeProvider>

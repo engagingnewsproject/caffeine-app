@@ -23,8 +23,9 @@ EMULATOR_PID=$!
 # Wait a few seconds to ensure the emulator has started
 sleep 20
 
-# Start the Next.js development server
+# Start the Next.js development server (with emulator env so app connects to emulators)
 echo "Starting Next.js development server..."
+export NEXT_PUBLIC_USE_EMULATOR=true
 yarn next dev
 
 # Wait for the Next.js server to exit before continuing

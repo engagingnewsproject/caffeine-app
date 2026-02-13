@@ -35,17 +35,22 @@ let perf = null;
 
 // Check if we're running in a browser environment
 if (typeof window !== 'undefined') {
-    // Initialize Analytics
   analytics = getAnalytics(app);
-    // Initialize Performance Monitoring
   perf = getPerformance(app);
-  // Initialize App Check with ReCaptcha Enterprise
+
+  // App Check: set debug token for localhost when env var is set (so Firestore Enforced accepts requests in dev:prod)
   // Docs: https://firebase.google.com/docs/app-check/web/debug-provider?authuser=0
-  if (process.env.NODE_ENV !== 'development') {
-    self.FIREBASE_APPCHECK_DEBUG_TOKEN = process.env.NEXT_PUBLIC_FIREBASE_APPCHECK_DEBUG_TOKEN
+  const debugToken = process.env.NEXT_PUBLIC_APPCHECK_DEBUG_TOKEN;
+  if (debugToken) {
+    self.FIREBASE_APPCHECK_DEBUG_TOKEN = debugToken;
+  }
+
+  // Initialize App Check when we have a site key (prod or dev:prod). With debug token set above, SDK uses it and passes verification.
+  const recaptchaSiteKey = process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_SITE_KEY;
+  if (recaptchaSiteKey) {
     initializeAppCheck(app, {
-        provider: new ReCaptchaV3Provider(process.env.NEXT_PUBLIC_FIREBASE_RECAPTCHA_SITE_KEY),
-        isTokenAutoRefreshEnabled: true // Set to true to allow auto-refresh.
+      provider: new ReCaptchaV3Provider(recaptchaSiteKey),
+      isTokenAutoRefreshEnabled: true,
     });
   }
 }
@@ -61,8 +66,9 @@ export const functions = getFunctions(app);
 // UNCOMMENT BELOW: enable connection to firebase functions emulator
 // connectFunctionsEmulator(functions,"127.0.0.1",5001)
 
-// If running in development environment, connect to Firestore emulator
-if (process.env.NODE_ENV === 'development') {
+// Connect to emulators only when explicitly enabled (e.g. yarn dev with start-dev.sh).
+// yarn dev:prod runs Next without the emulator, so we use production Firebase.
+if (process.env.NEXT_PUBLIC_USE_EMULATOR === 'true') {
   console.log("Running Emulator");
   connectAuthEmulator(auth, "http://127.0.0.1:9099");
   connectFirestoreEmulator(db, "localhost", 8080);
